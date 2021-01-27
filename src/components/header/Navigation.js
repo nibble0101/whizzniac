@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 function Navigation(props) {
   return (
     <nav>
-      <ul>
+      <ul className="header__nav">
         <li>
           <NavLink exact to="/">About</NavLink>
         </li>

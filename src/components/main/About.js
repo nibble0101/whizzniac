@@ -6,15 +6,10 @@ function About() {
     <section>
       <p> Hi there, welcome to Whizzniac</p>
       <p>
-        We notice you have been here before. Would you like to start another
-        quiz or continue from where you stopped?
+        Would you like to start attempting quiz?
       </p>
       <p>
-        <Link to="quiz"> New quiz </Link> 
-        <Link to="previous"> From where I stopped </Link>
-      </p>
-      <p>
-        <Link to="/nowhere"> Start quiz </Link>
+        <Link to="/categories"> Start Quiz </Link> 
       </p>
     </section>
   );

@@ -19,8 +19,10 @@ The header should have an appropriate logo on the left. On the right, there shou
 The main section should have an appropriate welcoming message and a link with text "ATTEMPT QUIZ". When this link is clicked, the user should be taken to a page where they select quiz category and difficulty level.
 
 1. When a user clicks the link with the text "ATTEMPT QUIZ" on the welcoming page, the URL displayed in the address bar should change and the user should be taken to a page where he selects  quiz category, difficulty level and then continue to the quiz.
-2. There should be a default quiz category and difficulty level selected but a user is free to change them.
-3. There should be a link, if clicked should take the user to a page displaying the first question and the possible solutions. The URL in the address bar should change as well. This page shouldn't display the quiz category and difficulty level dropdowns.
+2. The URL in the address bar should have a query string indicating the quiz category and the difficulty level selected.
+3. This is where the quiz category and total quiz count in each category are fetched. They have to be fetched once when the component is rendered the very first time.
+4. There should be a default quiz category and difficulty level selected but a user is free to change them.
+5. There should be a link, if clicked should take the user to a page displaying the first question and the possible solutions. The URL in the address bar should change as well. This page shouldn't display the quiz category and difficulty level dropdowns.
 
 #### Questions and Solutions
 
