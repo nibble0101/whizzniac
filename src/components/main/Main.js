@@ -23,7 +23,7 @@ function Main(params) {
         <Route path="/categories">
           <Categories />
         </Route>
-        <Route path="/quiz/:category/:total/:difficulty">
+        <Route path="/quiz">
            <Quiz />
         </Route>
       </Switch>

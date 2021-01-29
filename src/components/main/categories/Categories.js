@@ -79,7 +79,7 @@ function Categories() {
       </div>
       <div>
         <Link
-          to={`/quiz/${quizCategoryId}/${quizCategoryTotal}/${quizDifficultyLevelId}`}
+          to={`/quiz?category=${quizCategoryId}&total=${quizCategoryTotal}&difficulty=${quizDifficultyLevelId}`}
         >
           Start quiz
         </Link>

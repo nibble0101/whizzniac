@@ -1,5 +1,5 @@
 .header{
-    background-color: gray;
+    background-color: black;
     color: white;
     display: flex;
     justify-content: space-around;
@@ -8,6 +8,9 @@
 }
 body{
     margin: 0;
+    background-image: url("../background-image.png");
+    background-repeat: repeat;
+    background-position-x: left;
 }
 
 ul{
