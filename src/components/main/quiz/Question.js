@@ -18,6 +18,7 @@ function Question(props) {
           <h2>Question</h2>
           <p dangerouslySetInnerHTML={{__html: question.question}} />
         </div>
+        <hr  style={{color:'yellow'}}/>
         <div>
           <h2>Solutions</h2>
           <div>
@@ -37,9 +38,8 @@ function Question(props) {
             ))}
           </div>
         </div>
-        <div></div>
       </form>
-      
+      <hr />
     </div>
   );
 }

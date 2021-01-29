@@ -67,7 +67,7 @@ function Quiz(props) {
     return <Loader />;
   }
   return (
-    <section>
+    <section className="quiz-wrapper">
       <Question
         selectSolutionHandler={selectSolutionHandler}
         question={quiz[currentQuestionIndex]}

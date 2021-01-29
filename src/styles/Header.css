@@ -1,16 +1,23 @@
 .header{
-    background-color: black;
-    color: white;
+    background-color: #282828;
+    background-color: #faf4e8;
+    color: whitesmoke;
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin: 0;
+    background-image: url("../background-image.png");
+    box-shadow:  inset 0px 1px 0px 0px rgb(0 0 0 / 5%), inset 0px 2px 3px 0px rgb(0 0 0 / 10%);;
+    background-repeat: repeat;
+    background-position-x: left;
+    background-color: black;
+    /* border-bottom: 1px solid black; */
+   
+   
 }
 body{
     margin: 0;
-    background-image: url("../background-image.png");
-    background-repeat: repeat;
-    background-position-x: left;
+    
 }
 
 ul{
@@ -21,5 +28,5 @@ ul{
 .header a{
     text-decoration: none;
     padding: 0 1em;
-    color: whitesmoke;
+    color: yellowgreen;
 }
