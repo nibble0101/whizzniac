@@ -1,5 +1,6 @@
 .footer{
-    background-color: grey;
+    background-color: black;
+    background-image: url("../grid.png");
     text-align: center;
     padding: 1em 0em;
     color: white;

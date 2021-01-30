@@ -1,5 +1,5 @@
 body{
-    background-image: url("../background-image.png");
+    background-image: url("../grid.png");
     box-shadow:  inset 0px 1px 0px 0px rgb(0 0 0 / 5%), inset 0px 2px 3px 0px rgb(0 0 0 / 10%);;
     background-repeat: repeat;
     background-color: white;

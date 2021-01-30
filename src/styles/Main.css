@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("../img-noise-361x370\ \(2\).png");
+    background-image: url("../grid.png");
     color: whitesmoke;
-    background-color: teal;
+    background-color: #121212;
 }
