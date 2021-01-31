@@ -71,9 +71,25 @@ function getQuizCountForEachApiRequest(totalQuizCount) {
   }
   return quizCountPerBatch;
 }
+
+function formatQuestions(quizArray) {
+  return quizArray.map((quizObject) => {
+    quizObject.possibleAnswersToSelectFrom = insertCorrectSolution(
+      quizObject.incorrect_answers,
+      quizObject.correct_answer
+    );
+    quizObject.correctAnswer = quizObject.correct_answer;
+    delete quizObject.incorrect_answers;
+    delete quizObject.correct_answer;
+    quizObject.hasAttemptedQuiz = false;
+    quizObject.selectedAnswer = "";
+    return quizObject;
+  });
+}
 export {
   insertCorrectSolution,
   parseQueryString,
   getSelectedOptionId,
   getQuizCountForEachApiRequest,
+  formatQuestions,
 };
