@@ -1,18 +1,15 @@
 import React from "react";
 
 function Question(props) {
-  const { 
-      selectSolutionHandler,
-      question
-    } = props;
+  const { selectSolutionHandler, question } = props;
   return (
     <div className="quiz">
       <form>
         <div>
           <h2>Question</h2>
-          <p dangerouslySetInnerHTML={{__html: question.question}} />
+          <p dangerouslySetInnerHTML={{ __html: question.question }} />
         </div>
-        <hr  style={{color:'yellow'}}/>
+        <hr style={{ color: "yellow" }} />
         <div>
           <h2>Solutions</h2>
           <div>
@@ -26,7 +23,7 @@ function Question(props) {
                     onChange={() => selectSolutionHandler(solution)}
                     checked={solution === question.selectedAnswer}
                   />
-                  <span dangerouslySetInnerHTML={{__html: solution}} />
+                  <span dangerouslySetInnerHTML={{ __html: solution }} />
                 </label>
               </p>
             ))}

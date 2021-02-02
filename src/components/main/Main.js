@@ -5,11 +5,12 @@ import { License } from "./License";
 import { Categories } from "./categories/Categories";
 import { Quiz} from "./quiz/Quiz";
 import { Switch, Route } from "react-router-dom";
+import { getHeaderHeight, getViewportHeight } from "../../utils/css-styles-utils";
 import "../../styles/Main.css";
 
-function Main(params) {
+function Main() {
   return (
-    <main className="main">
+    <main className="main" style={{minHeight: `${getViewportHeight() - getHeaderHeight()}px`}}>
       <Switch>
         <Route exact path="/">
           <About />

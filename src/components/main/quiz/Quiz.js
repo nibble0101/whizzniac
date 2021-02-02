@@ -7,6 +7,7 @@ import {
 import { Loader } from "../../loader/Loader";
 import { Question } from "./Question";
 import axios from "axios";
+import Fade from "react-reveal/Fade";
 
 const quizBaseUrl = "https://opentdb.com/api.php";
 
@@ -24,8 +25,8 @@ function Quiz(props) {
       return;
     }
     if (quiz[currentQuestionIndex].selectedAnswer === "") {
-      // alert("Please select solution");
-      // return;
+      alert("Please select solution");
+      return;
     }
     setCurrentQuestionIndex((currentQuestionIndex) => currentQuestionIndex + 1);
   }
@@ -66,23 +67,34 @@ function Quiz(props) {
   console.log(quiz[currentQuestionIndex].selectedAnswer);
   return (
     <section className="quiz-wrapper">
-      <Question
-        selectSolutionHandler={selectSolutionHandler}
-        question={quiz[currentQuestionIndex]}
-        currentQuestionIndex={currentQuestionIndex}
-        total={parseInt(total)}
-      />
+      <Fade>
+        <Question
+          selectSolutionHandler={selectSolutionHandler}
+          question={quiz[currentQuestionIndex]}
+          currentQuestionIndex={currentQuestionIndex}
+          total={parseInt(total)}
+        />
+      </Fade>
       <div>
-        {currentQuestionIndex === 0 ? null : (
-          <button onClick={previousQuestionClickHandler} className="button">Previous</button>
-        )}
+        <button
+          onClick={previousQuestionClickHandler}
+          style={ currentQuestionIndex === 0 ? {cursor: "not-allowed"} : null}
+          className="button"
+        >
+          Previous
+        </button>
         {currentQuestionIndex + 1 === parseInt(total) ||
         currentQuestionIndex === 49 ? null : (
-          <button onClick={nextQuestionClickHandler} className="button"> Next </button>
+          <button onClick={nextQuestionClickHandler} className="button">
+            Next
+          </button>
         )}
         {currentQuestionIndex + 1 === parseInt(total) ||
         currentQuestionIndex === 49 ? (
-          <button onClick={() => console.log("Display solution")} className="button">
+          <button
+            onClick={() => console.log("Display solution")}
+            className="button"
+          >
             Solution
           </button>
         ) : null}
