@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import {
   parseQueryString,
-  formatQuestions
+  formatQuestions,
 } from "../../../utils/generic-utils";
 import { Loader } from "../../loader/Loader";
 import { Question } from "./Question";
@@ -11,22 +11,22 @@ import axios from "axios";
 const quizBaseUrl = "https://opentdb.com/api.php";
 
 function Quiz(props) {
-  const { category, total} = parseQueryString(
-    useLocation().search
-  );
+  const { category, total } = parseQueryString(useLocation().search);
   const [quiz, setQuiz] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isFetchingData, setIsFetchingData] = useState(false);
-  
 
   function nextQuestionClickHandler() {
-    if(currentQuestionIndex + 1 === parseInt(total) || currentQuestionIndex === 49){
+    if (
+      currentQuestionIndex + 1 === parseInt(total) ||
+      currentQuestionIndex === 49
+    ) {
       return;
     }
-    if(quiz[currentQuestionIndex].selectedAnswer === ""){
-      alert("Please select solution");
-      return;
-    } 
+    if (quiz[currentQuestionIndex].selectedAnswer === "") {
+      // alert("Please select solution");
+      // return;
+    }
     setCurrentQuestionIndex((currentQuestionIndex) => currentQuestionIndex + 1);
   }
   function previousQuestionClickHandler() {
@@ -40,9 +40,9 @@ function Quiz(props) {
   }
   useEffect(() => {
     let quizCount;
-    if(parseInt(total) > 50){
+    if (parseInt(total) > 50) {
       quizCount = 50;
-    }else{
+    } else {
       quizCount = parseInt(total);
     }
     const url = `${quizBaseUrl}?amount=${quizCount}&category=${category}`;
@@ -74,11 +74,18 @@ function Quiz(props) {
       />
       <div>
         {currentQuestionIndex === 0 ? null : (
-          <button onClick={previousQuestionClickHandler}>Previous</button>
+          <button onClick={previousQuestionClickHandler} className="button">Previous</button>
         )}
-        {currentQuestionIndex + 1 === parseInt(total) ? null : (
-          <button onClick={nextQuestionClickHandler}> Next </button>
+        {currentQuestionIndex + 1 === parseInt(total) ||
+        currentQuestionIndex === 49 ? null : (
+          <button onClick={nextQuestionClickHandler} className="button"> Next </button>
         )}
+        {currentQuestionIndex + 1 === parseInt(total) ||
+        currentQuestionIndex === 49 ? (
+          <button onClick={() => console.log("Display solution")} className="button">
+            Solution
+          </button>
+        ) : null}
       </div>
     </section>
   );

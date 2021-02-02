@@ -1,14 +1,30 @@
-body{
-    background-image: url("../grid.png");
-    box-shadow:  inset 0px 1px 0px 0px rgb(0 0 0 / 5%), inset 0px 2px 3px 0px rgb(0 0 0 / 10%);;
-    background-repeat: repeat;
-    background-color: white;
-    background-position-x: left;
-    background-position-y: top
-
+body {
+  background-image: url("../grid.png");
+  box-shadow: inset 0px 1px 0px 0px rgb(0 0 0 / 5%),
+    inset 0px 2px 3px 0px rgb(0 0 0 / 10%);
+  background-repeat: repeat;
+  background-color: white;
+  background-position-x: left;
+  background-position-y: top;
 }
 
-.quiz{
-    width: 500px;
-    height: 300px;
+.quiz {
+  width: 500px;
+  min-height: 350px;
+  margin-bottom: 2em;
+}
+.button {
+  border-radius: 3px;
+  border: 1px solid #303434;
+  height: 32px;
+  min-width: 150px;
+  color: #b1b4ba;
+  line-height: 30px;
+  padding: 0 12px;
+  overflow-x: hidden;
+  text-align: center;
+  margin: 5px 5px 5px 0;
+  background-image: linear-gradient(-180deg, #626668 0, #303434 100%);
+  box-shadow: inset 0 -1px 0 0 #303434;
+  transition: all 120ms ease;
 }
