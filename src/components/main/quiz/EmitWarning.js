@@ -5,13 +5,13 @@ import Fade from "react-reveal/Fade";
 
 function EmitWarning(props) {
   return (
-    <div style={{ position: "fixed", top: "100px" }}>
+    <div>
       <Fade when={props.emitWarning}>
         <p
           className="emit-warning"
-          style={{ color: "brown", backgroundColor: "black", padding: "1em", width: "500px" }}
+          style={{ backgroundColor: "black", padding: "1em" }}
         >
-          <FontAwesomeIcon icon={faExclamationCircle} /> Please select solution
+         <span style={{color: "brown"}}> <FontAwesomeIcon icon={faExclamationCircle} /></span>  Please select solution
           before going to the next question
         </p>
       </Fade>
