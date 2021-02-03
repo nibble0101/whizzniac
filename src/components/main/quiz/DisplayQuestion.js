@@ -6,7 +6,8 @@ import {
 } from "../../../utils/generic-utils";
 import { Loader } from "../../loader/Loader";
 import { Question } from "./Question";
-import {  Controls } from "./Controls";
+import { Controls } from "./Controls";
+import { EmitWarning } from "./EmitWarning";
 import axios from "axios";
 import Fade from "react-reveal/Fade";
 
@@ -17,6 +18,7 @@ function DisplayQuestion(props) {
   const [quiz, setQuiz] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isFetchingData, setIsFetchingData] = useState(false);
+  const [emitWarning, setEmitWarning] = useState(false);
 
   function nextQuestionClickHandler() {
     if (
@@ -26,16 +28,22 @@ function DisplayQuestion(props) {
       return;
     }
     if (quiz[currentQuestionIndex].selectedAnswer === "") {
-      alert("Please select solution");
+      setEmitWarning(true);
       return;
     }
     setCurrentQuestionIndex((currentQuestionIndex) => currentQuestionIndex + 1);
   }
   function previousQuestionClickHandler() {
+    if (emitWarning === true) {
+      setEmitWarning(false);
+    }
     if (currentQuestionIndex === 0) return;
     setCurrentQuestionIndex((currentQuestionIndex) => currentQuestionIndex - 1);
   }
   function selectSolutionHandler(solution) {
+    if (emitWarning === true) {
+      setEmitWarning(false);
+    }
     const clone = [...quiz];
     clone[currentQuestionIndex].selectedAnswer = solution;
     setQuiz(clone);
@@ -68,6 +76,7 @@ function DisplayQuestion(props) {
 
   return (
     <section className="quiz-wrapper">
+      <EmitWarning emitWarning = {emitWarning}/>
       <Fade>
         <Question
           selectSolutionHandler={selectSolutionHandler}
@@ -78,10 +87,10 @@ function DisplayQuestion(props) {
       </Fade>
       <Fade>
         <Controls
-         nextQuestionClickHandler={nextQuestionClickHandler}
-         previousQuestionClickHandler={previousQuestionClickHandler}
-         currentQuestionIndex={currentQuestionIndex}
-         total={parseInt(total)}
+          nextQuestionClickHandler={nextQuestionClickHandler}
+          previousQuestionClickHandler={previousQuestionClickHandler}
+          currentQuestionIndex={currentQuestionIndex}
+          total={parseInt(total)}
         />
       </Fade>
     </section>

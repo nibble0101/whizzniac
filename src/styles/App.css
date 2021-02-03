@@ -12,6 +12,7 @@ body {
   width: 500px;
   min-height: 350px;
   margin-bottom: 2em;
+  position: relative;
 }
 .button {
   border-radius: 3px;

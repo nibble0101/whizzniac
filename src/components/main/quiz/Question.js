@@ -1,5 +1,4 @@
 import React from "react";
-
 function Question(props) {
   const { selectSolutionHandler, question } = props;
   return (
