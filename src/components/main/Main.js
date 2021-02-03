@@ -3,7 +3,7 @@ import { About } from "./About";
 import { History } from "./History";
 import { License } from "./License";
 import { Categories } from "./categories/Categories";
-import { Quiz} from "./quiz/Quiz";
+import { DisplayQuestion } from "./quiz/DisplayQuestion";
 import { Switch, Route } from "react-router-dom";
 import { getHeaderHeight, getViewportHeight } from "../../utils/css-styles-utils";
 import "../../styles/Main.css";
@@ -25,7 +25,7 @@ function Main() {
           <Categories />
         </Route>
         <Route path="/quiz">
-           <Quiz />
+           <DisplayQuestion />
         </Route>
       </Switch>
     </main>

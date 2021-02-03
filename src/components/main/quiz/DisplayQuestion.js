@@ -6,12 +6,13 @@ import {
 } from "../../../utils/generic-utils";
 import { Loader } from "../../loader/Loader";
 import { Question } from "./Question";
+import {  Controls } from "./Controls";
 import axios from "axios";
 import Fade from "react-reveal/Fade";
 
 const quizBaseUrl = "https://opentdb.com/api.php";
 
-function Quiz(props) {
+function DisplayQuestion(props) {
   const { category, total } = parseQueryString(useLocation().search);
   const [quiz, setQuiz] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -64,7 +65,7 @@ function Quiz(props) {
   if (isFetchingData === true || quiz.length === 0) {
     return <Loader />;
   }
-  console.log(quiz[currentQuestionIndex].selectedAnswer);
+
   return (
     <section className="quiz-wrapper">
       <Fade>
@@ -75,32 +76,16 @@ function Quiz(props) {
           total={parseInt(total)}
         />
       </Fade>
-      <div>
-        <button
-          onClick={previousQuestionClickHandler}
-          style={ currentQuestionIndex === 0 ? {cursor: "not-allowed"} : null}
-          className="button"
-        >
-          Previous
-        </button>
-        {currentQuestionIndex + 1 === parseInt(total) ||
-        currentQuestionIndex === 49 ? null : (
-          <button onClick={nextQuestionClickHandler} className="button">
-            Next
-          </button>
-        )}
-        {currentQuestionIndex + 1 === parseInt(total) ||
-        currentQuestionIndex === 49 ? (
-          <button
-            onClick={() => console.log("Display solution")}
-            className="button"
-          >
-            Solution
-          </button>
-        ) : null}
-      </div>
+      <Fade>
+        <Controls
+         nextQuestionClickHandler={nextQuestionClickHandler}
+         previousQuestionClickHandler={previousQuestionClickHandler}
+         currentQuestionIndex={currentQuestionIndex}
+         total={parseInt(total)}
+        />
+      </Fade>
     </section>
   );
 }
 
-export { Quiz };
+export { DisplayQuestion };
