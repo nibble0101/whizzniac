@@ -5,3 +5,31 @@
     padding: 1em 0em;
     color: white;
 }
+.footer__top-bar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.footer-social-media{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.footer-social-media a{
+    text-decoration: none;
+    padding: 0.5em;
+    color: #efefef;
+    display: flex;
+    justify-content: space-between;
+    font-size: small;
+}
+.footer__bottom-bar{
+  background-color: #121212;
+  width: 80%;
+  margin: 1em auto;
+  padding: 1em;
+  border-radius: 5px;
+  font-size: small;
+
+}

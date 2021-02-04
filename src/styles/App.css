@@ -29,3 +29,21 @@ body {
   box-shadow: inset 0 -1px 0 0 #303434;
   transition: all 120ms ease;
 }
+
+.social-media {
+  position: fixed;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: 1px solid #303434;
+  transition: background-color 1s ease-in-out;
+}
+.social-media:hover{
+  background-color: #303434;
+}
+.social-media a {
+  padding: 0.5em;
+  color: inherit;
+}
