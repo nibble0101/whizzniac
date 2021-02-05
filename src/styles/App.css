@@ -56,6 +56,10 @@ body {
 .footer .about a{
    text-decoration: none;
    color: yellowgreen;
+   transition: color 1s ease-in-out;
+}
+.footer .about a:hover{
+  color: #0F6464;
 }
 .social-media a {
   width: 10px;
@@ -73,4 +77,8 @@ body {
   color: #303434;
   font-size: xx-large;
   margin-right: 0.5em ;
+}
+.about-section{
+  width: 50%;
+  margin: auto;
 }

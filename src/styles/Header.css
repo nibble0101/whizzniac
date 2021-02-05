@@ -29,6 +29,10 @@ ul{
     text-decoration: none;
     padding: 0 1em;
     color: yellowgreen;
+    transition: color 1s ease-in-out;
+}
+header a:hover{
+    color: #0F6464;
 }
 .logo-text{
     position: relative;
