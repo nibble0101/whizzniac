@@ -30,3 +30,7 @@ ul{
     padding: 0 1em;
     color: yellowgreen;
 }
+.logo-text{
+    position: relative;
+    bottom: 5px;
+}

@@ -9,9 +9,9 @@ function Footer() {
   return (
     <footer className="footer">
       <section className="footer__top-bar">
-        <SocialMedia />
         <Logo />
         <FooterAbout />
+        <SocialMedia />
       </section>
       <section className="footer__bottom-bar">
         <CopyRight />
