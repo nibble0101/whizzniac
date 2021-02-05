@@ -82,3 +82,26 @@ body {
   width: 50%;
   margin: auto;
 }
+.statistics{
+  position: fixed;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 5px 10px;
+  border: 1px solid #303434;
+  transition: background-color 1s ease-in-out, border-radius 1s ease-in-out;
+  text-align: center;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.statistics:hover{
+  background-color: #303434;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 20px;
+}
+.numerator, .denominator{
+  color: yellowgreen;
+  font-size: smaller;
+}

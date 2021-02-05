@@ -8,6 +8,7 @@ import { Loader } from "../../loader/Loader";
 import { Question } from "./Question";
 import { Controls } from "./Controls";
 import { EmitWarning } from "./EmitWarning";
+import { Statistics} from "./Statistics";
 import axios from "axios";
 import Fade from "react-reveal/Fade";
 
@@ -76,6 +77,10 @@ function DisplayQuestion(props) {
 
   return (
     <section className="quiz-wrapper">
+      <Statistics 
+      currentQuestionIndex={currentQuestionIndex}
+      total={total}
+      />
       <EmitWarning emitWarning = {emitWarning}/>
       <Fade>
         <Question

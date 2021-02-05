@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { DropDownOptions } from "./DropDownOptions";
 import { Loader } from "../../loader/Loader";
 import { getSelectedOptionId } from "../../../utils/generic-utils";
@@ -20,13 +20,17 @@ function Categories() {
   const [quizCategoryTotal, setQuizCategoryTotal] = useState(0);
   const [quizDifficultyLevelId, setQuizDifficultyLevelId] = useState(1000);
   const [isFetchingData, setIsFetchingData] = useState(false);
+  const history = useHistory();
   function selectQuizCategory(event) {
     const selectedOptionId = getSelectedOptionId(
       quizCategories,
       event.target.value
     );
     setQuizCategoryId(selectedOptionId);
-    setQuizCategoryTotal(quizCategoryTotalCounts[`${selectedOptionId}`].total_num_of_verified_questions)
+    setQuizCategoryTotal(
+      quizCategoryTotalCounts[`${selectedOptionId}`]
+        .total_num_of_verified_questions
+    );
   }
 
   function selectDifficultyLevel(event) {
@@ -36,18 +40,26 @@ function Categories() {
     );
     setQuizDifficultyLevelId(selectedOptionId);
   }
+  function startQuizHandler() {
+    const path = `/quiz?category=${quizCategoryId}&total=${quizCategoryTotal}&difficulty=${quizDifficultyLevelId}`;
+    history.push(path);
+  }
   useEffect(() => {
     async function fetchQuizCategories() {
       try {
         setIsFetchingData(true);
         const categories = (await axios.get(categoriesUrl)).data;
-        const categoriesQuizCount = (await axios.get(categoriesQuizCountUrl)).data;
+        const categoriesQuizCount = (await axios.get(categoriesQuizCountUrl))
+          .data;
         const { id } = categories.trivia_categories[0];
         setQuizCategories(categories.trivia_categories);
         setQuizCategoryId(id);
         setQuizDifficultyLevelId(difficultyLevelObject[0].id);
         setQuizCategoryTotalCounts(categoriesQuizCount.categories);
-        setQuizCategoryTotal(categoriesQuizCount.categories[`${id}`].total_num_of_verified_questions);
+        setQuizCategoryTotal(
+          categoriesQuizCount.categories[`${id}`]
+            .total_num_of_verified_questions
+        );
       } catch (error) {
         console.log(`Error: ${error.name} Message: ${error.message}`);
       } finally {
@@ -77,12 +89,10 @@ function Categories() {
           changeHandler={selectDifficultyLevel}
         />
       </div>
-      <div>
-        <Link
-          to={`/quiz?category=${quizCategoryId}&total=${quizCategoryTotal}&difficulty=${quizDifficultyLevelId}`}
-        >
+      <div style={{marginTop: "1em"}}>
+        <button className="button" onClick={startQuizHandler}>
           Start quiz
-        </Link>
+        </button>
       </div>
     </div>
   );
