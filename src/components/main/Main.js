@@ -5,13 +5,21 @@ import { License } from "./License";
 import { Categories } from "./categories/Categories";
 import { DisplayQuestion } from "./quiz/DisplayQuestion";
 import { SocialMedia } from "./SocialMedia";
+import { Solutions } from "./solutions/Solutions";
+import { Error } from "./error/Error";
 import { Switch, Route } from "react-router-dom";
-import { getHeaderHeight, getViewportHeight } from "../../utils/css-styles-utils";
+import {
+  getHeaderHeight,
+  getViewportHeight,
+} from "../../utils/css-styles-utils";
 import "../../styles/Main.css";
 
 function Main() {
   return (
-    <main className="main" style={{minHeight: `${getViewportHeight() - getHeaderHeight()}px`}}>
+    <main
+      className="main"
+      style={{ minHeight: `${getViewportHeight() - getHeaderHeight()}px` }}
+    >
       <SocialMedia />
       <Switch>
         <Route exact path="/">
@@ -27,7 +35,13 @@ function Main() {
           <Categories />
         </Route>
         <Route path="/quiz">
-           <DisplayQuestion />
+          <DisplayQuestion />
+        </Route>
+        <Route path="/solutions">
+          <Solutions />
+        </Route>
+        <Route path="/error">
+          <Error />
         </Route>
       </Switch>
     </main>

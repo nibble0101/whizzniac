@@ -6,6 +6,7 @@ function Controls(props) {
     currentQuestionIndex,
     total,
     nextQuestionClickHandler,
+    displaySolutionsHandler
   } = props;
   const isLastQuestion =
     currentQuestionIndex + 1 === total || currentQuestionIndex === 49;
@@ -20,7 +21,7 @@ function Controls(props) {
       </button>
       {isLastQuestion === true ? (
         <button
-          onClick={() => console.log("Display solution")}
+          onClick={displaySolutionsHandler}
           className="button"
         >
          Display Solution

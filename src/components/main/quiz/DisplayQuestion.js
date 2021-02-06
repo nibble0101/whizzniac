@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import {
   parseQueryString,
   formatQuestions,
@@ -20,6 +20,7 @@ function DisplayQuestion(props) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isFetchingData, setIsFetchingData] = useState(false);
   const [emitWarning, setEmitWarning] = useState(false);
+  const history = useHistory();
 
   function nextQuestionClickHandler() {
     if (
@@ -48,6 +49,9 @@ function DisplayQuestion(props) {
     const clone = [...quiz];
     clone[currentQuestionIndex].selectedAnswer = solution;
     setQuiz(clone);
+  }
+  function displaySolutionsHandler() {
+    history.push("/solutions", { quiz})
   }
   useEffect(() => {
     let quizCount;
@@ -95,6 +99,7 @@ function DisplayQuestion(props) {
           nextQuestionClickHandler={nextQuestionClickHandler}
           previousQuestionClickHandler={previousQuestionClickHandler}
           currentQuestionIndex={currentQuestionIndex}
+          displaySolutionsHandler={displaySolutionsHandler}
           total={parseInt(total)}
         />
       </Fade>

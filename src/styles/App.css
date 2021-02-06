@@ -105,3 +105,16 @@ body {
   color: yellowgreen;
   font-size: smaller;
 }
+.check-mark{
+  color: yellowgreen;
+}
+.cross-mark{
+  color: brown;
+}
+.correct-answer{
+  color: yellowgreen;
+  
+}
+.correct-answer input{
+  background-color: yellowgreen;
+}
