@@ -86,10 +86,31 @@ function formatQuestions(quizArray) {
     return quizObject;
   });
 }
+/**
+ * Gets token from local storage
+ * @returns {string}
+ */
+
+function getTokenFromLocalStorage(){
+  const token = localStorage.getItem("token");
+  return token ? token : "";
+}
+
+/**
+ * Sets token to local storage
+ * @param {string} token 
+ * @returns { undefined }
+ */
+
+function setTokenToLocalStorage(token) {
+  localStorage.setItem("token", token)
+}
 export {
   insertCorrectSolution,
   parseQueryString,
   getSelectedOptionId,
   getQuizCountForEachApiRequest,
   formatQuestions,
+  getTokenFromLocalStorage,
+  setTokenToLocalStorage
 };

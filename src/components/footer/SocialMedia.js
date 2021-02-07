@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFacebookF,
+  faDev,
   faTwitter,
   faGithub,
   faCodepen,
@@ -11,16 +11,16 @@ function SocialMedia() {
     <div className="footer-social-media">
       <p>You can follow me on</p>
       <p className="get-in-touch">
-        <a href="/">
-          <FontAwesomeIcon icon={faFacebookF} />
+        <a href="https://dev.to/nibble0101">
+          <FontAwesomeIcon icon={faDev} />
         </a>
-        <a href="/">
+        <a href="https://twitter.com/MJMAWA">
           <FontAwesomeIcon icon={faTwitter} />
         </a>
-        <a href="/">
+        <a href="https://github.com/nibble0101">
           <FontAwesomeIcon icon={faGithub} />
         </a>
-        <a href="/">
+        <a href="https://codepen.io/nibble0101">
           <FontAwesomeIcon icon={faCodepen} />
         </a>
       </p>

@@ -1,6 +1,6 @@
 import React from "react";
 import { About } from "./About";
-import { History } from "./History";
+import { History } from "./history/History";
 import { License } from "./License";
 import { Categories } from "./categories/Categories";
 import { DisplayQuestion } from "./quiz/DisplayQuestion";

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import { getTokenFromLocalStorage } from "../../../utils/generic-utils";
+import { whizzniacDb } from "../../../config/firebase-config";
 import {
   parseQueryString,
   formatQuestions,
@@ -20,6 +23,9 @@ function DisplayQuestion(props) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isFetchingData, setIsFetchingData] = useState(false);
   const [emitWarning, setEmitWarning] = useState(false);
+  const [values, loading, error] = useCollectionData(
+    whizzniacDb.where("token", "==", getTokenFromLocalStorage())
+  );
   const history = useHistory();
 
   function nextQuestionClickHandler() {
@@ -75,6 +81,7 @@ function DisplayQuestion(props) {
     }
     fetchQuiz();
   }, [category, total]);
+
   if (isFetchingData === true || quiz.length === 0) {
     return <Loader />;
   }
