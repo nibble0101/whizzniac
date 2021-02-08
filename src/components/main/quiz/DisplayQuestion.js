@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-import { getTokenFromLocalStorage } from "../../../utils/generic-utils";
-import { whizzniacDb } from "../../../config/firebase-config";
 import {
   parseQueryString,
   formatQuestions,
@@ -17,15 +14,14 @@ import Fade from "react-reveal/Fade";
 
 const quizBaseUrl = "https://opentdb.com/api.php";
 
+
 function DisplayQuestion(props) {
-  const { category, total } = parseQueryString(useLocation().search);
+  const { category, total, difficulty } = parseQueryString(useLocation().search);
   const [quiz, setQuiz] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isFetchingData, setIsFetchingData] = useState(false);
   const [emitWarning, setEmitWarning] = useState(false);
-  const [values, loading, error] = useCollectionData(
-    whizzniacDb.where("token", "==", getTokenFromLocalStorage())
-  );
+  const [isError, setIsError] = useState(false);
   const history = useHistory();
 
   function nextQuestionClickHandler() {
@@ -57,7 +53,7 @@ function DisplayQuestion(props) {
     setQuiz(clone);
   }
   function displaySolutionsHandler() {
-    history.push("/solutions", { quiz})
+    history.push("/solutions", {quiz, difficulty})
   }
   useEffect(() => {
     let quizCount;
@@ -74,7 +70,7 @@ function DisplayQuestion(props) {
         const formattedQuiz = formatQuestions(fetchedQuiz.results);
         setQuiz((currentQuiz) => [...currentQuiz, ...formattedQuiz]);
       } catch (err) {
-        console.log("An error has occurred...");
+        setIsError(true);
       } finally {
         setIsFetchingData(false);
       }
@@ -82,10 +78,17 @@ function DisplayQuestion(props) {
     fetchQuiz();
   }, [category, total]);
 
+  if(!category || !total || !difficulty){
+    history.push("/error", {message: "Incorrect or non-existent quiz category or difficulty level"})
+    return null;
+  }
+  if(isError === true){
+    history.push("/error", {message: "Failed to fetch quiz"});
+    return null;
+  }
   if (isFetchingData === true || quiz.length === 0) {
     return <Loader />;
   }
-
   return (
     <section className="quiz-wrapper">
       <Statistics 

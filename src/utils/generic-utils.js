@@ -30,7 +30,9 @@ function insertCorrectSolution(incorrectSolutions = [], correctSolution) {
  */
 
 function parseQueryString(queryString) {
+  if(queryString.trim() === "") return {category:"", total: "", difficulty:""};
   return queryString
+    .trim()
     .slice(1)
     .split("&")
     .reduce((parsedQueryStringObject, parameterValuePair) => {
@@ -91,19 +93,19 @@ function formatQuestions(quizArray) {
  * @returns {string}
  */
 
-function getTokenFromLocalStorage(){
+function getTokenFromLocalStorage() {
   const token = localStorage.getItem("token");
   return token ? token : "";
 }
 
 /**
  * Sets token to local storage
- * @param {string} token 
+ * @param {string} token
  * @returns { undefined }
  */
 
 function setTokenToLocalStorage(token) {
-  localStorage.setItem("token", token)
+  localStorage.setItem("token", token);
 }
 export {
   insertCorrectSolution,
@@ -112,5 +114,5 @@ export {
   getQuizCountForEachApiRequest,
   formatQuestions,
   getTokenFromLocalStorage,
-  setTokenToLocalStorage
+  setTokenToLocalStorage,
 };

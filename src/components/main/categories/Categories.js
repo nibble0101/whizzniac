@@ -18,8 +18,9 @@ function Categories() {
   const [quizCategoryTotalCounts, setQuizCategoryTotalCounts] = useState({});
   const [quizCategoryId, setQuizCategoryId] = useState(9);
   const [quizCategoryTotal, setQuizCategoryTotal] = useState(0);
-  const [quizDifficultyLevelId, setQuizDifficultyLevelId] = useState(1000);
+  const [quizDifficultyLevel, setQuizDifficultyLevel] = useState("Mixed");
   const [isFetchingData, setIsFetchingData] = useState(false);
+  const [isError, setIsError] = useState(false);
   const history = useHistory();
   function selectQuizCategory(event) {
     const selectedOptionId = getSelectedOptionId(
@@ -34,14 +35,10 @@ function Categories() {
   }
 
   function selectDifficultyLevel(event) {
-    const selectedOptionId = getSelectedOptionId(
-      difficultyLevelObject,
-      event.target.value
-    );
-    setQuizDifficultyLevelId(selectedOptionId);
+    setQuizDifficultyLevel(event.target.value);
   }
   function startQuizHandler() {
-    const path = `/quiz?category=${quizCategoryId}&total=${quizCategoryTotal}&difficulty=${quizDifficultyLevelId}`;
+    const path = `/quiz?category=${quizCategoryId}&total=${quizCategoryTotal}&difficulty=${quizDifficultyLevel.toLowerCase()}`;
     history.push(path);
   }
   useEffect(() => {
@@ -54,14 +51,15 @@ function Categories() {
         const { id } = categories.trivia_categories[0];
         setQuizCategories(categories.trivia_categories);
         setQuizCategoryId(id);
-        setQuizDifficultyLevelId(difficultyLevelObject[0].id);
+        setQuizDifficultyLevel(difficultyLevelObject[0].name);
         setQuizCategoryTotalCounts(categoriesQuizCount.categories);
         setQuizCategoryTotal(
           categoriesQuizCount.categories[`${id}`]
             .total_num_of_verified_questions
         );
       } catch (error) {
-        console.log(`Error: ${error.name} Message: ${error.message}`);
+        console.log(`Error Name: ${error.name}, Error Message: ${error.message}`);
+        setIsError(true);
       } finally {
         setIsFetchingData(false);
       }
@@ -70,6 +68,10 @@ function Categories() {
   }, []);
   if (isFetchingData === true) {
     return <Loader />;
+  }
+  if(isError === true){
+    history.push("/error", {message: "Failed to fetch trivia categories"});
+    return null;
   }
   return (
     <div className="category">

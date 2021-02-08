@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Statistics } from "../quiz/Statistics";
+import {
+  getTokenFromLocalStorage,
+  setTokenToLocalStorage,
+} from "../../../utils/generic-utils";
+import { whizzniacDb, arrayUnion } from "../../../config/firebase-config";
 import { getPraisePhrase, getMotivationalPhrase } from "./phrases";
 import { useLocation, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { v4 as uuidv4 } from "uuid";
 import {
   faCheckCircle,
   faTimesCircle,
@@ -12,6 +18,49 @@ function Solutions(props) {
   const { state } = useLocation();
   const history = useHistory();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const quizAttemptDetails = useMemo(() => {
+    if (!state) return null;
+    const quizAttemptDetailsObject = {
+      quizAttemptedOn: Date.now(),
+      quizCategory: state.quiz[0].category,
+      quizDifficultyLevel: state.difficulty,
+      quizScore: 0,
+      questionCount: state.quiz.length,
+    };
+    const totalScore = state.quiz.reduce((cummulativeScore, quizObject) => {
+      return (
+        cummulativeScore +
+        (quizObject.selectedAnswer === quizObject.correctAnswer ? 1 : 0)
+      );
+    }, 0);
+    quizAttemptDetailsObject.quizScore = totalScore;
+    return quizAttemptDetailsObject;
+  }, [state]);
+  useEffect(() => {
+    if(quizAttemptDetails === null) return;
+    const token = getTokenFromLocalStorage();
+    if (token) {
+      whizzniacDb.doc(token).update({
+        attempts: arrayUnion(quizAttemptDetails)
+      });
+    } else {
+      const newToken = uuidv4();
+      setTokenToLocalStorage(newToken);
+      whizzniacDb
+        .doc(newToken)
+        .set({
+          token: newToken,
+          attempts: [quizAttemptDetails],
+        })
+        .then(() => {
+          alert("Written successfully to database");
+        })
+        .catch((err) => {
+          alert("An error has occurred");
+        });
+    }
+  }, [quizAttemptDetails]);
+  console.log(quizAttemptDetails);
   function nextQuestionClickHandler() {
     if (currentQuestionIndex + 1 === state.quiz.length) {
       return;
@@ -24,21 +73,26 @@ function Solutions(props) {
     }
     setCurrentQuestionIndex((currentQuestionIndex) => currentQuestionIndex - 1);
   }
-  if(!state){
-      history.push("/error", {message: "Sorry you can't have solutions without first attempting quiz"});
-      return null;
+  if (!state) {
+    history.push("/error", {
+      message: "Sorry you can't have solutions without first attempting quiz",
+    });
+    return null;
   }
   const question = state.quiz[currentQuestionIndex];
   const isCorrectSolution = question.correctAnswer === question.selectedAnswer;
   let phrase;
-  if(isCorrectSolution){
-      phrase = `You got it right. ${getPraisePhrase()}.`;
-  }else{
-    phrase = `You got it wrong. ${getMotivationalPhrase()}.`; 
+  if (isCorrectSolution) {
+    phrase = `You got it right. ${getPraisePhrase()}.`;
+  } else {
+    phrase = `You got it wrong. ${getMotivationalPhrase()}.`;
   }
   return (
     <div className="quiz">
-      <Statistics currentQuestionIndex={currentQuestionIndex} total={state.quiz.length} />
+      <Statistics
+        currentQuestionIndex={currentQuestionIndex}
+        total={state.quiz.length}
+      />
       <form>
         <div>
           <h2>Question</h2>
