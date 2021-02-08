@@ -12,7 +12,7 @@ function Navigation(props) {
           <NavLink to="/history">History</NavLink>
         </li>
         <li>
-          <NavLink to="/license">License</NavLink>
+          <NavLink to="/categories">Quiz</NavLink>
         </li>
       </ul>
     </nav>

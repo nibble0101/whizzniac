@@ -1,0 +1,15 @@
+
+
+.history table{
+    border-collapse: collapse;
+    box-shadow: 1px 2px 20px black;
+    font-family: monospace;
+}
+.history thead{
+    background-color: #303434;
+}
+.history th, td{
+    padding: 1em;
+    margin: 0;
+    border: 1px solid #303434;
+}

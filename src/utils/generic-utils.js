@@ -73,6 +73,10 @@ function getQuizCountForEachApiRequest(totalQuizCount) {
   }
   return quizCountPerBatch;
 }
+/**
+ * Formats questions
+ * @param {object[]} quizArray 
+ */
 
 function formatQuestions(quizArray) {
   return quizArray.map((quizObject) => {
@@ -88,6 +92,32 @@ function formatQuestions(quizArray) {
     return quizObject;
   });
 }
+
+/**
+ * Formats date into human readable format
+ * @param {integer} date 
+ * @returns { string }
+ */
+
+function formatDate(date) {
+  const dateObject = new Date(date);
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ]
+  return `${months[dateObject.getMonth()]}, ${dateObject.getDate()} ${dateObject.getFullYear()}`;
+}
+
 /**
  * Gets token from local storage
  * @returns {string}
@@ -115,4 +145,5 @@ export {
   formatQuestions,
   getTokenFromLocalStorage,
   setTokenToLocalStorage,
+  formatDate
 };
