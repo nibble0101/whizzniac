@@ -13,11 +13,6 @@
     column-gap: 1em;
 }
 
-.footer__middle-bar{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
 .footer-social-media a {
   text-decoration: none;
   display: inline-flex;
@@ -37,9 +32,7 @@
     color: whitesmoke;
     background-image: linear-gradient(-180deg, skyblue 0, darkblue 100%);
 }
-.footer__bottom-bar{
-  font-size: small;
-}
+
 .footer__bottom-bar a{
   color: yellowgreen;
   text-decoration: none;
@@ -47,4 +40,16 @@
 }
 .footer__bottom-bar a:hover{
   color:#0F6464;
+}
+
+@media screen and (max-width: 640px){
+   .footer__top-bar{
+     grid-template-columns: 1fr;
+     grid-template-rows: 1fr 1fr 1fr;
+     padding: 0 1em;
+   }
+   .about{
+     width: 60%;
+     margin: auto;
+   }
 }
