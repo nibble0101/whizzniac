@@ -16,6 +16,14 @@ body{
     margin: 0;
     
 }
+.nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hamburger-menu-icon{
+    display: none;
+}
 
 ul{
     list-style-type: none;
@@ -28,10 +36,43 @@ ul{
     color: yellowgreen;
     transition: color 1s ease-in-out;
 }
-header a:hover{
+.header a:hover{
     color: #0F6464;
 }
 .logo-text{
     position: relative;
     bottom: 5px;
+}
+
+@media screen and (max-width: 550px){
+    .hamburger-menu-icon{
+        display: block;
+        z-index: 9;
+        cursor: pointer;
+    }
+    .header__nav{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
+      z-index: 8;
+      margin: 0;
+      padding: 0;
+      display: none;
+    }
+    .display__hamburger{
+        display: flex;
+    }
+    .header__nav li{
+        padding: 1em 0;
+    }
+    .lock-scroll{
+        overflow: hidden;
+    }
 }

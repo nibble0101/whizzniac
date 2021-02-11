@@ -118,3 +118,8 @@ body {
 .correct-answer input{
   background-color: yellowgreen;
 }
+@media screen and (max-width: 650px){
+  .social-media{
+    display: none;
+  }
+}
