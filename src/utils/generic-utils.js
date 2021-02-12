@@ -137,6 +137,26 @@ function getTokenFromLocalStorage() {
 function setTokenToLocalStorage(token) {
   localStorage.setItem("token", token);
 }
+
+/**
+ * Determines if a question is the last question
+ * @param {integer} currentQuestionIndex 
+ * @param {integer} totalQuestions 
+ * @returns {boolean}
+ */
+
+function isLastQuestion(currentQuestionIndex, totalQuestions ) {
+  return  currentQuestionIndex + 1 === totalQuestions || currentQuestionIndex === 49;
+}
+/**
+ * Determine if the last question has been attempted
+ * @param {object} lastQuestionObject 
+ * @returns { boolean }
+ */
+
+function isLastQuestionAttempted(lastQuestionObject) {
+  return lastQuestionObject.selectedAnswer !== "";
+}
 export {
   insertCorrectSolution,
   parseQueryString,
@@ -145,5 +165,7 @@ export {
   formatQuestions,
   getTokenFromLocalStorage,
   setTokenToLocalStorage,
-  formatDate
+  formatDate,
+  isLastQuestion,
+  isLastQuestionAttempted
 };
