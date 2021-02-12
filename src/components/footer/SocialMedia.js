@@ -11,16 +11,16 @@ function SocialMedia() {
     <div className="footer-social-media">
       <p>You can follow me on</p>
       <p className="get-in-touch">
-        <a href="https://dev.to/nibble0101">
+        <a href="https://dev.to/nibble0101" className="social-media-link">
           <FontAwesomeIcon icon={faDev} />
         </a>
-        <a href="https://twitter.com/MJMAWA">
+        <a href="https://twitter.com/MJMAWA" className="social-media-link">
           <FontAwesomeIcon icon={faTwitter} />
         </a>
-        <a href="https://github.com/nibble0101">
+        <a href="https://github.com/nibble0101" className="social-media-link">
           <FontAwesomeIcon icon={faGithub} />
         </a>
-        <a href="https://codepen.io/nibble0101">
+        <a href="https://codepen.io/nibble0101" className="social-media-link">
           <FontAwesomeIcon icon={faCodepen} />
         </a>
       </p>

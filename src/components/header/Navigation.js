@@ -7,7 +7,7 @@ function Navigation(props) {
   
   function hamburgerMenuClicHandler() {
     const body = document.querySelector("body");
-    body.classList.toggle("lock-scroll");
+    body.classList.toggle("lock-body-scroll");
     setDisplayMenu((displayFlag) => !displayFlag);
   }
   return (

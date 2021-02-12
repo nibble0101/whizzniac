@@ -5,7 +5,7 @@ function DropDownOptions(props) {
   return (
     <label>
       {labelText}
-      <select onChange={changeHandler}>
+      <select onChange={changeHandler} className="select">
         {options.map((optionObject) => {
           return (
             <option key={optionObject.id} id={optionObject.id} value = {optionObject.name}>

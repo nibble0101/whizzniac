@@ -7,11 +7,13 @@ function Logo() {
   return (
     <div>
       <p>WhizzNiac</p>
-      <Link to="/">
-        <span className="logo-icon">
-          <FontAwesomeIcon icon={faBookOpen} />
-        </span>
-      </Link>
+      <p>
+        <Link to="/">
+          <span className="logo-icon">
+            <FontAwesomeIcon icon={faBookOpen} />
+          </span>
+        </Link>
+      </p>
     </div>
   );
 }

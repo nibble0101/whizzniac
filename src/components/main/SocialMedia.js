@@ -11,17 +11,17 @@ function SocialMedia() {
     <div className="social-media">
       <p>Share</p>
       <p className="social-media__icons">
-        <a href="/">
+        <a href="/" className="social-media-link">
           <FontAwesomeIcon icon={faFacebookF} />
         </a>
       </p>
       <p className="social-media__icons">
-        <a href="/">
+        <a href="/" className="social-media-link">
           <FontAwesomeIcon icon={faTwitter} />
         </a>
       </p>
       <p className="social-media__icons">
-        <a href="/">
+        <a href="/" className="social-media-link">
           <FontAwesomeIcon icon={faWhatsapp} />
         </a>
       </p>

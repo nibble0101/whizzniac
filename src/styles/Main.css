@@ -6,23 +6,3 @@
     color: #b1b4ba;
     background-color: #141414;
 }
-select {
-    background-color: #131418;
-    color: #507657;
-    border: 1px solid transparent;
-    margin: 0 0.2em;
-    width: 300px;
-    margin-left: 1em;
-  }
-select::-webkit-scrollbar{
-    width: 10px;
-    background-color: #507657;
-}
-select::-webkit-scrollbar-thumb{
-   background-color: #b1b4ba;
-   border-radius: 10px;
-   transition: background-color 1s ease-in-out;
-}
-select::-webkit-scrollbar-thumb:hover{
-    background-color: #303434;
-}

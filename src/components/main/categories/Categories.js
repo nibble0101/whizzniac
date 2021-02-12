@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { DropDownOptions } from "./DropDownOptions";
 import { Loader } from "../../loader/Loader";
 import { getSelectedOptionId } from "../../../utils/generic-utils";
+import "../../../styles/Categories.css"
 import axios from "axios";
 const difficultyLevelObject = [
   { id: 1000, name: "Mixed" },
@@ -75,7 +76,7 @@ function Categories() {
   }
   return (
     <div className="category">
-      <h1> Select category</h1>
+      <h1 className="category__title"> Select category</h1>
       <div>
         <DropDownOptions
           labelText="Category"
@@ -83,7 +84,7 @@ function Categories() {
           changeHandler={selectQuizCategory}
         />
       </div>
-      <h1>Select difficulty</h1>
+      <h1 className="category__title">Select difficulty</h1>
       <div>
         <DropDownOptions
           labelText="Difficulty"

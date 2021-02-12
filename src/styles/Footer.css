@@ -13,7 +13,7 @@
     column-gap: 1em;
 }
 
-.footer-social-media a {
+.social-media-link {
   text-decoration: none;
   display: inline-flex;
   justify-content: center;
@@ -28,17 +28,18 @@
   box-shadow: inset 0 -1px 0 0 #303434;
   transition: color 1s ease-in-out, background-image 1s ease-in-out;
 }
-.footer-social-media a:hover{
+.social-media-link:hover{
     color: whitesmoke;
     background-image: linear-gradient(-180deg, skyblue 0, darkblue 100%);
 }
 
-.footer__bottom-bar a{
+.link{
   color: yellowgreen;
   text-decoration: none;
   transition: color 1s ease-in-out;
+
 }
-.footer__bottom-bar a:hover{
+.link:hover{
   color:#0F6464;
 }
 
@@ -48,7 +49,7 @@
      grid-template-rows: 1fr 1fr 1fr;
      padding: 0 1em;
    }
-   .about{
+   .data-source{
      width: 60%;
      margin: auto;
    }

@@ -7,15 +7,11 @@
     align-items: center;
     margin: 0;
     background-image: url("../grid.png");
-    box-shadow:  inset 0px 1px 0px 0px rgb(0 0 0 / 5%), inset 0px 2px 3px 0px rgb(0 0 0 / 10%);;
     background-repeat: repeat;
     background-position-x: left;
     background-color: black;   
 }
-body{
-    margin: 0;
-    
-}
+
 .nav{
     display: flex;
     justify-content: center;
@@ -30,6 +26,7 @@ ul{
     display: flex;
 
 }
+/* a tags nested inside NavLink */
 .header a{
     text-decoration: none;
     padding: 0 1em;
@@ -39,10 +36,15 @@ ul{
 .header a:hover{
     color: #0F6464;
 }
+
+/* Nudges the text "WhizzNiac" in the right position beside the logo in the header */
 .logo-text{
     position: relative;
-    bottom: 5px;
+    bottom: 6px;
+    left: 3px;
+   
 }
+
 
 @media screen and (max-width: 550px){
     .hamburger-menu-icon{
@@ -72,7 +74,7 @@ ul{
     .header__nav li{
         padding: 1em 0;
     }
-    .lock-scroll{
+    .lock-body-scroll{
         overflow: hidden;
     }
 }

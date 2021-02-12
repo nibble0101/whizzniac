@@ -1,11 +1,10 @@
 body {
   background-image: url("../grid.png");
-  box-shadow: inset 0px 1px 0px 0px rgb(0 0 0 / 5%),
-    inset 0px 2px 3px 0px rgb(0 0 0 / 10%);
   background-repeat: repeat;
   background-color: white;
   background-position-x: left;
   background-position-y: top;
+  margin: 0;
 }
 
 .quiz {
@@ -14,6 +13,7 @@ body {
   margin-bottom: 2em;
   position: relative;
 }
+/* Styling navigation buttons on all pages */
 .button {
   border-radius: 3px;
   border: 1px solid #303434;
@@ -29,7 +29,7 @@ body {
   box-shadow: inset 0 -1px 0 0 #303434;
   transition: all 120ms ease;
 }
-
+/* Styling social media icon on the left view */
 .social-media {
   position: fixed;
   top: 50%;
@@ -43,9 +43,6 @@ body {
   border-bottom-left-radius: 20px;
   
 }
-.social-media__icons{
-  font-size: x-small;
-}
 .social-media:hover {
   background-color: #303434;
   border-top-right-radius: 0px;
@@ -53,30 +50,14 @@ body {
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 20px;
 }
-.footer .about a{
-   text-decoration: none;
-   color: yellowgreen;
-   transition: color 1s ease-in-out;
+.social-media__icons{
+  font-size: x-small;
 }
-.footer .about a:hover{
-  color: #0F6464;
-}
-.social-media a {
-  width: 10px;
-  height: 10px;
-  padding: 0.5em;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-image: linear-gradient(-180deg, #626668 0, #303434 100%);
-  box-shadow: inset 0 -1px 0 0 #303434;
-  color: yellowgreen;
-}
+
+/*Logo icon at the header and footer */
 .logo-icon{
   color: #303434;
   font-size: xx-large;
-  margin-right: 0.5em ;
 }
 .about-section{
   width: 50%;
@@ -119,6 +100,7 @@ body {
   background-color: yellowgreen;
 }
 @media screen and (max-width: 650px){
+  /* Hide social media icon on left view on mobile devices */
   .social-media{
     display: none;
   }
