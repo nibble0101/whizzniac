@@ -8,9 +8,6 @@ body {
 }
 
 .quiz {
-  width: 500px;
-  min-height: 350px;
-  margin-bottom: 2em;
   position: relative;
 }
 /* Styling navigation buttons on all pages */
@@ -59,8 +56,8 @@ body {
   color: #303434;
   font-size: xx-large;
 }
-.about-section{
-  width: 50%;
+.about-section, .history{
+  width: 60%;
   margin: auto;
 }
 .statistics{

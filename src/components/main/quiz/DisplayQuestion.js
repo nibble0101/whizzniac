@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory, Prompt } from "react-router-dom";
 import {
   parseQueryString,
   formatQuestions,
@@ -8,15 +8,16 @@ import { Loader } from "../../loader/Loader";
 import { Question } from "./Question";
 import { Controls } from "./Controls";
 import { EmitWarning } from "./EmitWarning";
-import { Statistics} from "./Statistics";
+import { Statistics } from "./Statistics";
 import axios from "axios";
 import Fade from "react-reveal/Fade";
 
 const quizBaseUrl = "https://opentdb.com/api.php";
 
-
 function DisplayQuestion(props) {
-  const { category, total, difficulty } = parseQueryString(useLocation().search);
+  const { category, total, difficulty } = parseQueryString(
+    useLocation().search
+  );
   const [quiz, setQuiz] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isFetchingData, setIsFetchingData] = useState(false);
@@ -53,7 +54,7 @@ function DisplayQuestion(props) {
     setQuiz(clone);
   }
   function displaySolutionsHandler() {
-    history.push("/solutions", {quiz, difficulty})
+    history.push("/solutions", { quiz, difficulty });
   }
   useEffect(() => {
     let quizCount;
@@ -78,12 +79,14 @@ function DisplayQuestion(props) {
     fetchQuiz();
   }, [category, total]);
 
-  if(!category || !total || !difficulty){
-    history.push("/error", {message: "Incorrect or non-existent quiz category or difficulty level"})
+  if (!category || !total || !difficulty) {
+    history.push("/error", {
+      message: "Incorrect or non-existent quiz category or difficulty level",
+    });
     return null;
   }
-  if(isError === true){
-    history.push("/error", {message: "Failed to fetch quiz"});
+  if (isError === true) {
+    history.push("/error", { message: "Failed to fetch quiz" });
     return null;
   }
   if (isFetchingData === true || quiz.length === 0) {
@@ -91,11 +94,12 @@ function DisplayQuestion(props) {
   }
   return (
     <section className="quiz-wrapper">
-      <Statistics 
-      currentQuestionIndex={currentQuestionIndex}
-      total={total}
+      <Prompt when={true} message="Your progress will not be saved" />
+      <Statistics
+        currentQuestionIndex={currentQuestionIndex}
+        total={parseInt(total) >= 50 ? 50 : total}
       />
-      <EmitWarning emitWarning = {emitWarning}/>
+      <EmitWarning emitWarning={emitWarning} />
       <Fade>
         <Question
           selectSolutionHandler={selectSolutionHandler}
