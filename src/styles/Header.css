@@ -77,4 +77,11 @@ ul{
     .lock-body-scroll{
         overflow: hidden;
     }
+    .header{
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+    .header a{
+        padding: 0;
+    }
 }

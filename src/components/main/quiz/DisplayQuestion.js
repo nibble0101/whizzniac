@@ -3,7 +3,7 @@ import { useLocation, useHistory, Prompt } from "react-router-dom";
 import {
   parseQueryString,
   formatQuestions,
-  isLastQuestionAttempted
+  isLastQuestionAttempted,
 } from "../../../utils/generic-utils";
 import { Loader } from "../../loader/Loader";
 import { Question } from "./Question";
@@ -93,19 +93,21 @@ function DisplayQuestion(props) {
   if (isFetchingData === true || quiz.length === 0) {
     return <Loader />;
   }
- 
-  const lastQuestionHasBeenAttempted = isLastQuestionAttempted(quiz[quiz.length - 1]);
+
+  const lastQuestionHasBeenAttempted = isLastQuestionAttempted(
+    quiz[quiz.length - 1]
+  );
   return (
     <section className="quiz-wrapper">
-      <Prompt 
-      when={!lastQuestionHasBeenAttempted} 
-      message="Are you sure you want to close this page? Your progress will not be saved" 
+      <Prompt
+        when={!lastQuestionHasBeenAttempted}
+        message="Are you sure you want to close this page? Your progress will not be saved"
       />
+      <EmitWarning emitWarning={emitWarning} />
       <Statistics
         currentQuestionIndex={currentQuestionIndex}
         total={parseInt(total) >= 50 ? 50 : total}
       />
-      <EmitWarning emitWarning={emitWarning} />
       <Fade>
         <Question
           selectSolutionHandler={selectSolutionHandler}

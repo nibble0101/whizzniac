@@ -60,7 +60,7 @@ function Solutions(props) {
         });
     }
   }, [quizAttemptDetails]);
-  console.log(quizAttemptDetails);
+ 
   function nextQuestionClickHandler() {
     if (currentQuestionIndex + 1 === state.quiz.length) {
       return;
@@ -88,7 +88,7 @@ function Solutions(props) {
     phrase = `You got it wrong. ${getMotivationalPhrase()}.`;
   }
   return (
-    <div className="quiz">
+    <div className="solutions-wrapper">
       <Statistics
         currentQuestionIndex={currentQuestionIndex}
         total={state.quiz.length}
@@ -98,7 +98,7 @@ function Solutions(props) {
           <h2>Question</h2>
           <p dangerouslySetInnerHTML={{ __html: question.question }} />
         </div>
-        <hr style={{ color: "yellow" }} />
+        <hr />
         <div>
           <h2>Solutions</h2>
           <div>

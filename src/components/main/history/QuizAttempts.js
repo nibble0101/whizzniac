@@ -8,6 +8,7 @@ function QuizAttempts({ attempts }) {
         Hi there. Thanks for coming back. We notice you have attempted this quiz{" "}
         {attempts.length} times.
       </p>
+      <div className="table-wrapper">
       <table>
         <thead>
           <tr>
@@ -34,6 +35,7 @@ function QuizAttempts({ attempts }) {
           })}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }

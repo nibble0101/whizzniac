@@ -4,14 +4,14 @@ import Fade from "react-reveal/Fade";
 function Statistics(props) {
   const { currentQuestionIndex, total } = props;
   return (
-    <section className="statistics">
-      <Fade>
-        <p>No.</p>
-        <p className="numerator">{currentQuestionIndex + 1}</p>
-        <hr />
-        <p className="denominator">{total}</p>
-      </Fade>
-    </section>
+    <Fade>
+      <p className="statistics">
+        <span className="statistics__quiz-count">
+          Question: {currentQuestionIndex + 1}
+        </span>
+        <span className="statistics__quiz-count"> Total: {total}</span>
+      </p>
+    </Fade>
   );
 }
 
