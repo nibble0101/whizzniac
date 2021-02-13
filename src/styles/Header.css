@@ -11,7 +11,9 @@
     background-position-x: left;
     background-color: black;   
 }
-
+.header .selected{
+    color: brown;
+}
 .nav{
     display: flex;
     justify-content: center;

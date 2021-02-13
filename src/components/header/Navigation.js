@@ -29,15 +29,15 @@ function Navigation(props) {
         onClick={hamburgerMenuClicHandler}
       >
         <li>
-          <NavLink exact to="/">
+          <NavLink exact to="/" activeClassName="selected">
             About
           </NavLink>
         </li>
         <li>
-          <NavLink to="/history">History</NavLink>
+          <NavLink to="/history" activeClassName="selected">History</NavLink>
         </li>
         <li>
-          <NavLink to="/categories">Quiz</NavLink>
+          <NavLink to="/categories" activeClassName="selected">Quiz</NavLink>
         </li>
       </ul>
     </nav>

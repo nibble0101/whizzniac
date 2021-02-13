@@ -58,6 +58,7 @@ body {
   margin: auto;
   max-width: 620px;
 }
+
 .quiz-wrapper, .solutions-wrapper{
   max-width: 500px;
   margin: auto;
