@@ -25,11 +25,11 @@ function QuizAttempts({ attempts }) {
             return (
               <tr key={attempt.quizAttemptedOn}>
                 <td>{index + 1}</td>
-                <th>{formatDate(attempt.quizAttemptedOn)}</th>
+                <td>{formatDate(attempt.quizAttemptedOn)}</td>
                 <td> {attempt.quizScore} </td>
-                <th>{attempt.questionCount}</th>
-                <th>{attempt.quizCategory}</th>
-                <th>{attempt.quizDifficultyLevel}</th>
+                <td>{attempt.questionCount}</td>
+                <td>{attempt.quizCategory}</td>
+                <td>{attempt.quizDifficultyLevel}</td>
               </tr>
             );
           })}
