@@ -7,6 +7,20 @@ body {
   margin: 0;
 }
 
+body::-webkit-scrollbar {
+  width: 10px;
+  background-color: #507657;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(78, 23, 23);
+  border-radius: 10px;
+  transition: background-color 1s ease-in-out;
+}
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #b1b4ba;
+}
+
+
 /* Styling navigation buttons on all pages */
 .button {
   border-radius: 3px;

@@ -5,4 +5,5 @@
     background-image: url("../grid.png");
     color: #b1b4ba;
     background-color: #141414;
+    min-height: 95vh;
 }
