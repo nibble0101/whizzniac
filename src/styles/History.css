@@ -1,6 +1,5 @@
 .table-wrapper table {
   border-collapse: collapse;
-  font-family: monospace;
   width: 620px;
 }
 .table-wrapper thead {
