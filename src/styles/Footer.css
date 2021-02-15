@@ -4,7 +4,8 @@
   text-align: center;
   padding: 1em 0em;
   color:  #b1b4ba;
-  font-size: small;
+  font-size: 0.9em;
+  font-weight: 300;
 }
 .footer__top-bar {
     display: grid;

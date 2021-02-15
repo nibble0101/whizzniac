@@ -1,11 +1,13 @@
 body {
   background-image: url("../grid.png");
   background-repeat: repeat;
-  background-color: white;
+  background-color: #303434;
   background-position-x: left;
   background-position-y: top;
   margin: 0;
   font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 300;
+  font-size: 1.1em;
 }
 
 body::-webkit-scrollbar {

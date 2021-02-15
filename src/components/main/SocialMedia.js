@@ -3,26 +3,27 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
   faTwitter,
-  faWhatsapp,
+  faLinkedinIn
 } from "@fortawesome/free-brands-svg-icons";
+import { hrefObject } from "../../utils/click-to-share";
 
 function SocialMedia() {
   return (
     <div className="social-media">
       <p>Share</p>
       <p className="social-media__icons">
-        <a href="/" className="social-media-link">
+        <a href={hrefObject.facebook} className="social-media-link">
           <FontAwesomeIcon icon={faFacebookF} />
         </a>
       </p>
       <p className="social-media__icons">
-        <a href="/" className="social-media-link">
+        <a href={hrefObject.twitter} className="social-media-link">
           <FontAwesomeIcon icon={faTwitter} />
         </a>
       </p>
       <p className="social-media__icons">
-        <a href="/" className="social-media-link">
-          <FontAwesomeIcon icon={faWhatsapp} />
+        <a href={hrefObject.linkedin} className="social-media-link">
+          <FontAwesomeIcon icon={faLinkedinIn } />
         </a>
       </p>
     </div>

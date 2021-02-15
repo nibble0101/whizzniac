@@ -19,4 +19,4 @@ This application was built using [react.js](https://reactjs.org/) and CSS. You c
 
 This project is hosted live on [Netlify](https://whizzniac.netlify.app/).
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/0e5576b0-60f5-4698-8e8f-3e7c0b6c8d74/deploy-status)](https://app.netlify.com/sites/whizzniac/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e4bf16ca-146b-42e4-b2f2-5adf1c9c4b53/deploy-status)](https://app.netlify.com/sites/whizzniac-quiz/deploys)
