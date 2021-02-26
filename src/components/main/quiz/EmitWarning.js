@@ -11,8 +11,11 @@ function EmitWarning(props) {
           className="emit-warning"
           style={{ backgroundColor: "black", padding: "1em" }}
         >
-         <span style={{color: "brown"}}> <FontAwesomeIcon icon={faExclamationCircle} /></span>  Please select solution
-          before going to the next question
+          <span style={{ color: "brown" }}>
+            {" "}
+            <FontAwesomeIcon icon={faExclamationCircle} />
+          </span>{" "}
+          Please select solution before going to the next question
         </p>
       </Fade>
     </div>

@@ -37,11 +37,11 @@ function Solutions(props) {
     return quizAttemptDetailsObject;
   }, [state]);
   useEffect(() => {
-    if(quizAttemptDetails === null) return;
+    if (quizAttemptDetails === null) return;
     const token = getTokenFromLocalStorage();
     if (token) {
       whizzniacDb.doc(token).update({
-        attempts: arrayUnion(quizAttemptDetails)
+        attempts: arrayUnion(quizAttemptDetails),
       });
     } else {
       const newToken = uuidv4();
@@ -60,7 +60,7 @@ function Solutions(props) {
         });
     }
   }, [quizAttemptDetails]);
- 
+
   function nextQuestionClickHandler() {
     if (currentQuestionIndex + 1 === state.quiz.length) {
       return;

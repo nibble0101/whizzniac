@@ -32,18 +32,16 @@ const motivational = [
   "Remain focused",
   "Be relentless",
   "Dust yourself and continue",
-  "That, my friend is the walk of life"
-
-]
+  "That, my friend is the walk of life",
+];
 
 function getPraisePhrase() {
-    const phraseIndex = Math.floor(Math.random() * praises.length);
-    return praises[phraseIndex];
+  const phraseIndex = Math.floor(Math.random() * praises.length);
+  return praises[phraseIndex];
 }
 function getMotivationalPhrase() {
-    const phraseIndex = Math.floor(Math.random() * motivational.length);
-    return motivational[phraseIndex];
+  const phraseIndex = Math.floor(Math.random() * motivational.length);
+  return motivational[phraseIndex];
 }
-
 
 export { getPraisePhrase, getMotivationalPhrase };

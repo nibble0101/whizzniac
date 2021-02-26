@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { DropDownOptions } from "./DropDownOptions";
 import { Loader } from "../../loader/Loader";
 import { getSelectedOptionId } from "../../../utils/generic-utils";
-import "../../../styles/Categories.css"
+import "../../../styles/Categories.css";
 import axios from "axios";
 const difficultyLevelObject = [
   { id: 1000, name: "Mixed" },
@@ -59,7 +59,9 @@ function Categories() {
             .total_num_of_verified_questions
         );
       } catch (error) {
-        console.log(`Error Name: ${error.name}, Error Message: ${error.message}`);
+        console.log(
+          `Error Name: ${error.name}, Error Message: ${error.message}`
+        );
         setIsError(true);
       } finally {
         setIsFetchingData(false);
@@ -70,8 +72,8 @@ function Categories() {
   if (isFetchingData === true) {
     return <Loader />;
   }
-  if(isError === true){
-    history.push("/error", {message: "Failed to fetch trivia categories"});
+  if (isError === true) {
+    history.push("/error", { message: "Failed to fetch trivia categories" });
     return null;
   }
   return (
@@ -92,7 +94,7 @@ function Categories() {
           changeHandler={selectDifficultyLevel}
         />
       </div>
-      <div style={{marginTop: "1em"}}>
+      <div style={{ marginTop: "1em" }}>
         <button className="button" onClick={startQuizHandler}>
           Start quiz
         </button>

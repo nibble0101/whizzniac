@@ -30,7 +30,8 @@ function insertCorrectSolution(incorrectSolutions = [], correctSolution) {
  */
 
 function parseQueryString(queryString) {
-  if(queryString.trim() === "") return {category:"", total: "", difficulty:""};
+  if (queryString.trim() === "")
+    return { category: "", total: "", difficulty: "" };
   return queryString
     .trim()
     .slice(1)
@@ -75,7 +76,7 @@ function getQuizCountForEachApiRequest(totalQuizCount) {
 }
 /**
  * Formats questions
- * @param {object[]} quizArray 
+ * @param {object[]} quizArray
  */
 
 function formatQuestions(quizArray) {
@@ -95,7 +96,7 @@ function formatQuestions(quizArray) {
 
 /**
  * Formats date into human readable format
- * @param {integer} date 
+ * @param {integer} date
  * @returns { string }
  */
 
@@ -113,9 +114,11 @@ function formatDate(date) {
     "Sep",
     "Oct",
     "Nov",
-    "Dec"
-  ]
-  return `${months[dateObject.getMonth()]}, ${dateObject.getDate()} ${dateObject.getFullYear()}`;
+    "Dec",
+  ];
+  return `${
+    months[dateObject.getMonth()]
+  }, ${dateObject.getDate()} ${dateObject.getFullYear()}`;
 }
 
 /**
@@ -140,17 +143,19 @@ function setTokenToLocalStorage(token) {
 
 /**
  * Determines if a question is the last question
- * @param {integer} currentQuestionIndex 
- * @param {integer} totalQuestions 
+ * @param {integer} currentQuestionIndex
+ * @param {integer} totalQuestions
  * @returns {boolean}
  */
 
-function isLastQuestion(currentQuestionIndex, totalQuestions ) {
-  return  currentQuestionIndex + 1 === totalQuestions || currentQuestionIndex === 49;
+function isLastQuestion(currentQuestionIndex, totalQuestions) {
+  return (
+    currentQuestionIndex + 1 === totalQuestions || currentQuestionIndex === 49
+  );
 }
 /**
  * Determine if the last question has been attempted
- * @param {object} lastQuestionObject 
+ * @param {object} lastQuestionObject
  * @returns { boolean }
  */
 
@@ -167,5 +172,5 @@ export {
   setTokenToLocalStorage,
   formatDate,
   isLastQuestion,
-  isLastQuestionAttempted
+  isLastQuestionAttempted,
 };

@@ -1,89 +1,86 @@
-.header{
-    background-color: #282828;
-    background-color: #faf4e8;
-    color: whitesmoke;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0;
-    background-image: url("../grid.png");
-    background-repeat: repeat;
-    background-position-x: left;
-    background-color: black;   
+.header {
+  background-color: #282828;
+  background-color: #faf4e8;
+  color: whitesmoke;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0;
+  background-image: url("../grid.png");
+  background-repeat: repeat;
+  background-position-x: left;
+  background-color: black;
 }
-.header .selected{
-    color: brown;
+.header .selected {
+  color: brown;
 }
-.nav{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.hamburger-menu-icon{
-    display: none;
+.hamburger-menu-icon {
+  display: none;
 }
 
-ul{
-    list-style-type: none;
-    display: flex;
-
+ul {
+  list-style-type: none;
+  display: flex;
 }
 /* a tags nested inside NavLink */
-.header a{
-    text-decoration: none;
-    padding: 0 1em;
-    color: yellowgreen;
-    transition: color 1s ease-in-out;
+.header a {
+  text-decoration: none;
+  padding: 0 1em;
+  color: yellowgreen;
+  transition: color 1s ease-in-out;
 }
-.header a:hover{
-    color: #0F6464;
+.header a:hover {
+  color: #0f6464;
 }
 
 /* Nudges the text "WhizzNiac" in the right position beside the logo in the header */
-.logo-text{
-    position: relative;
-    bottom: 6px;
-    left: 3px;
-   
+.logo-text {
+  position: relative;
+  bottom: 6px;
+  left: 3px;
 }
 
-
-@media screen and (max-width: 550px){
-    .hamburger-menu-icon{
-        display: block;
-        z-index: 9;
-        cursor: pointer;
-    }
-    .header__nav{
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background-color: black;
-      z-index: 8;
-      margin: 0;
-      padding: 0;
-      display: none;
-    }
-    .display__hamburger{
-        display: flex;
-    }
-    .header__nav li{
-        padding: 1em 0;
-    }
-    .lock-body-scroll{
-        overflow: hidden;
-    }
-    .header{
-        justify-content: space-between;
-        padding: 0 20px;
-    }
-    .header a{
-        padding: 0;
-    }
+@media screen and (max-width: 550px) {
+  .hamburger-menu-icon {
+    display: block;
+    z-index: 9;
+    cursor: pointer;
+  }
+  .header__nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    z-index: 8;
+    margin: 0;
+    padding: 0;
+    display: none;
+  }
+  .display__hamburger {
+    display: flex;
+  }
+  .header__nav li {
+    padding: 1em 0;
+  }
+  .lock-body-scroll {
+    overflow: hidden;
+  }
+  .header {
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+  .header a {
+    padding: 0;
+  }
 }

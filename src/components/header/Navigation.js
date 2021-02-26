@@ -4,7 +4,7 @@ import HamburgerMenu from "react-hamburger-menu";
 
 function Navigation(props) {
   const [displayMenu, setDisplayMenu] = useState(false);
-  
+
   function hamburgerMenuClicHandler() {
     const body = document.querySelector("body");
     body.classList.toggle("lock-body-scroll");
@@ -34,10 +34,14 @@ function Navigation(props) {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/history" activeClassName="selected">History</NavLink>
+          <NavLink to="/history" activeClassName="selected">
+            History
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/categories" activeClassName="selected">Quiz</NavLink>
+          <NavLink to="/categories" activeClassName="selected">
+            Quiz
+          </NavLink>
         </li>
       </ul>
     </nav>

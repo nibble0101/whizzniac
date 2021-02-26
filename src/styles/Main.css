@@ -1,9 +1,9 @@
-.main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url("../grid.png");
-    color: #b1b4ba;
-    background-color: #141414;
-    min-height: 95vh;
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../grid.png");
+  color: #b1b4ba;
+  background-color: #141414;
+  min-height: 95vh;
 }

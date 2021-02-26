@@ -1,7 +1,5 @@
 import React from "react";
-import {
-  isLastQuestion
-} from "../../../utils/generic-utils";
+import { isLastQuestion } from "../../../utils/generic-utils";
 
 function Controls(props) {
   const {
@@ -10,7 +8,7 @@ function Controls(props) {
     total,
     nextQuestionClickHandler,
     displaySolutionsHandler,
-    lastQuestionHasBeenAttempted
+    lastQuestionHasBeenAttempted,
   } = props;
   const lastQuestionOnDisplay = isLastQuestion(currentQuestionIndex, total);
   return (
@@ -22,18 +20,18 @@ function Controls(props) {
       >
         Previous
       </button>
-      {lastQuestionHasBeenAttempted === true && lastQuestionOnDisplay === true? (
-        <button
-          onClick={displaySolutionsHandler}
-          className="button"
-        >
-         Display Solution
+      {lastQuestionHasBeenAttempted === true &&
+      lastQuestionOnDisplay === true ? (
+        <button onClick={displaySolutionsHandler} className="button">
+          Display Solution
         </button>
       ) : (
-        <button 
-        onClick={nextQuestionClickHandler} 
-        className="button"
-        style={ lastQuestionOnDisplay === true ? { cursor: "not-allowed" } : null}
+        <button
+          onClick={nextQuestionClickHandler}
+          className="button"
+          style={
+            lastQuestionOnDisplay === true ? { cursor: "not-allowed" } : null
+          }
         >
           Next
         </button>

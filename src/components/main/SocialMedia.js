@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
   faTwitter,
-  faLinkedinIn
+  faLinkedinIn,
 } from "@fortawesome/free-brands-svg-icons";
 import { hrefObject } from "../../utils/click-to-share";
 
@@ -23,7 +23,7 @@ function SocialMedia() {
       </p>
       <p className="social-media__icons">
         <a href={hrefObject.linkedin} className="social-media-link">
-          <FontAwesomeIcon icon={faLinkedinIn } />
+          <FontAwesomeIcon icon={faLinkedinIn} />
         </a>
       </p>
     </div>
