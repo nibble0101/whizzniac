@@ -1,8 +1,14 @@
 import { render, screen } from "@testing-library/react";
-import App from "./App";
+import { App } from "../App";
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from "history";
 
 test("renders learn react link", () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
+  render(
+    <Router history={createMemoryHistory()}>
+      <App />
+    </Router>
+  );
+  const linkElement = screen.getByText(/About/i);
   expect(linkElement).toBeInTheDocument();
 });

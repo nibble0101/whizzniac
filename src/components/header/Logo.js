@@ -7,7 +7,7 @@ function Logo() {
   return (
     <div className="logo-wrapper">
       <Link to="/">
-        <span className="logo-icon">
+        <span className="logo-icon" data-testid="logo-container">
           <FontAwesomeIcon icon={faBookOpen} />
         </span>
         <span className="logo-text">WhizzNiac</span>
