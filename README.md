@@ -1,11 +1,11 @@
 # whizzNiac
 
-This is a Single Page Application(S.P.A) built with [react.js](https://reactjs.org/) and CSS. It is a quiz app with different categories. The project is hosted on [Netlify](https://app.netlify.com/) and can be viewed [Here](https://whizzniac.netlify.app/).
+This is a Single Page Application(S.P.A) built using [react.js](https://reactjs.org/), [react router](https://reactrouter.com/), [fire base](https://firebase.google.com/) and CSS. It is a quiz app which has equestions from different categories. The project is hosted on [Netlify](https://app.netlify.com/) and can be viewed [Here](https://whizzniac.netlify.app/).
 
 
 ## Data Source
 
-The quiz used in this application is from [Open Trivia Database](https://opentdb.com/).
+The quiz used in this application is sourced from [Open Trivia Database](https://opentdb.com/).
 
 ## Dependencies
 
@@ -19,4 +19,4 @@ This application was built using [react.js](https://reactjs.org/) and CSS. You c
 
 This project is hosted live on [Netlify](https://whizzniac.netlify.app/).
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/e4bf16ca-146b-42e4-b2f2-5adf1c9c4b53/deploy-status)](https://app.netlify.com/sites/whizzniac-quiz/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/69899758-208a-49a3-8b99-05bae9762220/deploy-status)](https://app.netlify.com/sites/whizzniac/deploys)
