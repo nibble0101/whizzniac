@@ -1,25 +1,23 @@
 import { render, screen } from "@testing-library/react";
 import { Header } from "../components/header/Header";
-// import { Navigation } from "../components/header/Navigation";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
 
-// describe("render Navigation component", () => {
-//   render(
-//     <Router history={createMemoryHistory()}>
-//       <Navigation />
-//     </Router>
-//   );
-// });
-
-describe("render header component", () => {
+describe("Render Header component correctly", () => {
   render(
     <Router history={createMemoryHistory()}>
       <Header />
     </Router>
   );
-  const linkElement = screen.getByText("About");
-  it("expect to have a link with text About", () => {
-    expect(linkElement).toBeInTheDocument();
+  it("Expects all Navigation links to be present and have correct text", () => {
+    expect(
+      screen.getByRole("link", { exact: true, name: "About" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { exact: true, name: "History" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { exact: true, name: "Quiz" })
+    ).toBeInTheDocument();
   });
 });
