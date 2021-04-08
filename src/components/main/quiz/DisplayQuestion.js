@@ -13,12 +13,10 @@ import { Statistics } from "./Statistics";
 import axios from "axios";
 import Fade from "react-reveal/Fade";
 
-const quizBaseUrl = "https://opentdb.com/api.php";
+const quizBaseUrl = "https://whizzniac-api.herokuapp.com";
 
 function DisplayQuestion(props) {
-  const { category, total, difficulty } = parseQueryString(
-    useLocation().search
-  );
+  const { category, difficulty } = parseQueryString(useLocation().search);
   const [quiz, setQuiz] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isFetchingData, setIsFetchingData] = useState(false);
@@ -27,10 +25,7 @@ function DisplayQuestion(props) {
   const history = useHistory();
 
   function nextQuestionClickHandler() {
-    if (
-      currentQuestionIndex + 1 === parseInt(total) ||
-      currentQuestionIndex === 49
-    ) {
+    if (currentQuestionIndex + 1 === quiz.length) {
       return;
     }
     if (quiz[currentQuestionIndex].selectedAnswer === "") {
@@ -58,19 +53,13 @@ function DisplayQuestion(props) {
     history.push("/solutions", { quiz, difficulty });
   }
   useEffect(() => {
-    let quizCount;
-    if (parseInt(total) > 50) {
-      quizCount = 50;
-    } else {
-      quizCount = parseInt(total);
-    }
-    const url = `${quizBaseUrl}?amount=${quizCount}&category=${category}`;
+    const url = `${quizBaseUrl}/trivia?category=${category}&difficulty=${difficulty}`;
     async function fetchQuiz() {
       try {
         setIsFetchingData(true);
         const fetchedQuiz = (await axios.get(url)).data;
-        const formattedQuiz = formatQuestions(fetchedQuiz.results);
-        setQuiz((currentQuiz) => [...currentQuiz, ...formattedQuiz]);
+        const formattedQuiz = formatQuestions(fetchedQuiz);
+        setQuiz(formattedQuiz);
       } catch (err) {
         setIsError(true);
       } finally {
@@ -78,9 +67,9 @@ function DisplayQuestion(props) {
       }
     }
     fetchQuiz();
-  }, [category, total]);
+  }, [category, difficulty]);
 
-  if (!category || !total || !difficulty) {
+  if (!category || !difficulty) {
     history.push("/error", {
       message: "Incorrect or non-existent quiz category or difficulty level",
     });
@@ -106,14 +95,14 @@ function DisplayQuestion(props) {
       <EmitWarning emitWarning={emitWarning} />
       <Statistics
         currentQuestionIndex={currentQuestionIndex}
-        total={parseInt(total) >= 50 ? 50 : total}
+        total={quiz.length}
       />
       <Fade>
         <Question
           selectSolutionHandler={selectSolutionHandler}
           question={quiz[currentQuestionIndex]}
           currentQuestionIndex={currentQuestionIndex}
-          total={parseInt(total)}
+          total={quiz.length}
         />
       </Fade>
       <Fade>
@@ -122,7 +111,7 @@ function DisplayQuestion(props) {
           previousQuestionClickHandler={previousQuestionClickHandler}
           currentQuestionIndex={currentQuestionIndex}
           displaySolutionsHandler={displaySolutionsHandler}
-          total={parseInt(total)}
+          total={quiz.length}
           lastQuestionHasBeenAttempted={lastQuestionHasBeenAttempted}
         />
       </Fade>
