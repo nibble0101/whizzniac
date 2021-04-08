@@ -11,14 +11,11 @@ const difficultyLevelObject = [
   { id: 1002, name: "Medium" },
   { id: 1003, name: "Hard" },
 ];
-const categoriesUrl = "https://opentdb.com/api_category.php";
-const categoriesQuizCountUrl = "https://opentdb.com/api_count_global.php";
+const categoriesUrl = "https://whizzniac-api.herokuapp.com/categories";
 
 function Categories() {
   const [quizCategories, setQuizCategories] = useState([]);
-  const [quizCategoryTotalCounts, setQuizCategoryTotalCounts] = useState({});
   const [quizCategoryId, setQuizCategoryId] = useState(9);
-  const [quizCategoryTotal, setQuizCategoryTotal] = useState(0);
   const [quizDifficultyLevel, setQuizDifficultyLevel] = useState("Mixed");
   const [isFetchingData, setIsFetchingData] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -29,35 +26,23 @@ function Categories() {
       event.target.value
     );
     setQuizCategoryId(selectedOptionId);
-    setQuizCategoryTotal(
-      quizCategoryTotalCounts[`${selectedOptionId}`]
-        .total_num_of_verified_questions
-    );
   }
 
   function selectDifficultyLevel(event) {
     setQuizDifficultyLevel(event.target.value);
   }
   function startQuizHandler() {
-    const path = `/quiz?category=${quizCategoryId}&total=${quizCategoryTotal}&difficulty=${quizDifficultyLevel.toLowerCase()}`;
+    const path = `/quiz?category=${quizCategoryId}&difficulty=${quizDifficultyLevel.toLowerCase()}`;
     history.push(path);
   }
   useEffect(() => {
     async function fetchQuizCategories() {
       try {
         setIsFetchingData(true);
-        const categories = (await axios.get(categoriesUrl)).data;
-        const categoriesQuizCount = (await axios.get(categoriesQuizCountUrl))
-          .data;
-        const { id } = categories.trivia_categories[0];
-        setQuizCategories(categories.trivia_categories);
-        setQuizCategoryId(id);
+        const categoriesArray = (await axios.get(categoriesUrl)).data;
+        setQuizCategories(categoriesArray);
+        setQuizCategoryId(categoriesArray[0].id);
         setQuizDifficultyLevel(difficultyLevelObject[0].name);
-        setQuizCategoryTotalCounts(categoriesQuizCount.categories);
-        setQuizCategoryTotal(
-          categoriesQuizCount.categories[`${id}`]
-            .total_num_of_verified_questions
-        );
       } catch (error) {
         console.log(
           `Error Name: ${error.name}, Error Message: ${error.message}`

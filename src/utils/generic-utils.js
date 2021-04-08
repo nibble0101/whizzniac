@@ -30,8 +30,7 @@ function insertCorrectSolution(incorrectSolutions = [], correctSolution) {
  */
 
 function parseQueryString(queryString) {
-  if (queryString.trim() === "")
-    return { category: "", total: "", difficulty: "" };
+  if (queryString.trim() === "") return { category: "", difficulty: "" };
   return queryString
     .trim()
     .slice(1)
@@ -149,9 +148,7 @@ function setTokenToLocalStorage(token) {
  */
 
 function isLastQuestion(currentQuestionIndex, totalQuestions) {
-  return (
-    currentQuestionIndex + 1 === totalQuestions || currentQuestionIndex === 49
-  );
+  return currentQuestionIndex + 1 === totalQuestions;
 }
 /**
  * Determine if the last question has been attempted
