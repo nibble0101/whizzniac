@@ -10,6 +10,29 @@ function getRandomInteger(from = 0, to) {
 }
 
 /**
+ * Shuffles array of elements in place
+ * Fisher–Yates shuffle algorithm
+ * Adapted from: https://bost.ocks.org/mike/shuffle/
+ * @param {any[]} array
+ * @returns {any[]}
+ */
+
+function shuffle(array) {
+  let currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+/**
  * Inserts correct solution at a random location among the wrong solutions
  * @param {any[]}  incorrectSolutions
  * @param {string} correctSolution
@@ -20,7 +43,7 @@ function insertCorrectSolution(incorrectSolutions = [], correctSolution) {
   const cloneIncorrectSolutions = [...incorrectSolutions];
   const insertAtIndex = getRandomInteger(0, cloneIncorrectSolutions.length);
   cloneIncorrectSolutions.splice(insertAtIndex, 0, correctSolution);
-  return cloneIncorrectSolutions;
+  return shuffle(cloneIncorrectSolutions);
 }
 
 /**
@@ -161,6 +184,7 @@ function isLastQuestionAttempted(lastQuestionObject) {
 }
 export {
   insertCorrectSolution,
+  shuffle,
   parseQueryString,
   getSelectedOptionId,
   getQuizCountForEachApiRequest,
