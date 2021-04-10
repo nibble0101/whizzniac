@@ -4,6 +4,7 @@ import {
   parseQueryString,
   formatQuestions,
   isLastQuestionAttempted,
+  shuffle,
 } from "../../../utils/generic-utils";
 import { Loader } from "../../loader/Loader";
 import { Question } from "./Question";
@@ -59,7 +60,8 @@ function DisplayQuestion(props) {
         setIsFetchingData(true);
         const fetchedQuiz = (await axios.get(url)).data;
         const formattedQuiz = formatQuestions(fetchedQuiz);
-        setQuiz(formattedQuiz);
+        const shuffledQuiz = shuffle(formattedQuiz);
+        setQuiz(shuffledQuiz);
       } catch (err) {
         setIsError(true);
       } finally {
