@@ -98,6 +98,7 @@ function DisplayQuestion(props) {
       <Statistics
         currentQuestionIndex={currentQuestionIndex}
         total={quiz.length}
+        score={null}
       />
       <Fade>
         <Question

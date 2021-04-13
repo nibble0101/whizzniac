@@ -10,8 +10,8 @@ function getRandomInteger(from = 0, to) {
 }
 
 /**
- * Shuffles array of elements in place
  * Fisher–Yates shuffle algorithm
+ * Shuffles array of elements in place
  * Adapted from: https://bost.ocks.org/mike/shuffle/
  * @param {any[]} array
  * @returns {any[]}
@@ -77,6 +77,17 @@ function getSelectedOptionId(options, selectedOptionName) {
     (option) => option.name === selectedOptionName
   );
   return selectedOption ? selectedOption.id : null;
+}
+
+/**
+ * Computes score in percentage points
+ * @param {integer} score
+ * @param {integer} total
+ * @returns {integer}
+ */
+
+function computeScore(score, total) {
+  return Math.floor((score / total) * 100);
 }
 
 /**
@@ -189,6 +200,7 @@ export {
   getSelectedOptionId,
   getQuizCountForEachApiRequest,
   formatQuestions,
+  computeScore,
   getTokenFromLocalStorage,
   setTokenToLocalStorage,
   formatDate,

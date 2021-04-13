@@ -92,6 +92,7 @@ function Solutions(props) {
       <Statistics
         currentQuestionIndex={currentQuestionIndex}
         total={state.quiz.length}
+        score={quizAttemptDetails.quizScore}
       />
       <form>
         <div>
