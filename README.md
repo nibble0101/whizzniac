@@ -1,6 +1,6 @@
 # whizzNiac
 
-[![Test](https://github.com/nibble0101/whizzniac/actions/workflows/test.yaml/badge.svg?event=check_run)](https://github.com/nibble0101/whizzniac/actions/workflows/test.yaml)
+[![Test](https://github.com/nibble0101/whizzniac/actions/workflows/test.yaml/badge.svg)](https://github.com/nibble0101/whizzniac/actions/workflows/test.yaml)
 
 This is a Single Page Application(S.P.A) built using [react.js](https://reactjs.org/), [react router](https://reactrouter.com/), [fire base](https://firebase.google.com/) and CSS. It is a quiz app which has questions from different categories. The project is hosted on [Netlify](https://app.netlify.com/) and can be viewed [Here](https://whizzniac.netlify.app/).
 
