@@ -43,7 +43,7 @@ The main section should have an appropriate welcoming message and a link with te
 
 The footer section displays copyright information and more information about the person who coded the app.
 
-1.  Provide the name of the person who coded the app. The name should be a link to the linkedIn page or GitHub page.
-2.  Provide option for sharing the app via social media. That means there should be OGP meta tags. Clicking the link should open the app if it is installed or open the site in a blank page.
-3.  Provide information about the source of the trivia questions and a link to the site.
-4.  Provide copyright information which is a link to the copyright page.
+1. Provide the name of the person who coded the app. The name should be a link to the linkedIn page or GitHub page.
+2. Provide option for sharing the app via social media. That means there should be OGP meta tags. Clicking the link should open the app if it is installed or open the site in a blank page.
+3. Provide information about the source of the trivia questions and a link to the site.
+4. Provide copyright information which is a link to the copyright page.
