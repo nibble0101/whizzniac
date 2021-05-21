@@ -7,6 +7,7 @@ import { DisplayQuestion } from "./quiz/DisplayQuestion";
 import { SocialMedia } from "./SocialMedia";
 import { Solutions } from "./solutions/Solutions";
 import { Error } from "./error/Error";
+import { PageNotFound } from "./PageNotFound";
 import { Switch, Route } from "react-router-dom";
 import "../../styles/Main.css";
 
@@ -18,23 +19,26 @@ function Main() {
         <Route exact path="/">
           <About />
         </Route>
-        <Route path="/history">
+        <Route exact path="/history">
           <History />
         </Route>
-        <Route path="/license">
+        <Route exact path="/license">
           <License />
         </Route>
-        <Route path="/categories">
+        <Route exact path="/categories">
           <Categories />
         </Route>
-        <Route path="/quiz">
+        <Route exact path="/quiz">
           <DisplayQuestion />
         </Route>
-        <Route path="/solutions">
+        <Route exact path="/solutions">
           <Solutions />
         </Route>
-        <Route path="/error">
+        <Route exact path="/error">
           <Error />
+        </Route>
+        <Route>
+          <PageNotFound />
         </Route>
       </Switch>
     </main>
