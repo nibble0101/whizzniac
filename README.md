@@ -2,6 +2,7 @@
 
 ![whizzniac front page](./whizzniac.png)
 
+[![Build](https://github.com/nibble0101/whizzniac/actions/workflows/build.yaml/badge.svg)](https://github.com/nibble0101/whizzniac/actions/workflows/build.yaml)
 [![Test](https://github.com/nibble0101/whizzniac/actions/workflows/test.yaml/badge.svg)](https://github.com/nibble0101/whizzniac/actions/workflows/test.yaml)
 [![codecov](https://codecov.io/gh/nibble0101/whizzniac/branch/master/graph/badge.svg?token=X93YVLGQ9H)](https://codecov.io/gh/nibble0101/whizzniac)
 
