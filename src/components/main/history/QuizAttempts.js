@@ -6,7 +6,7 @@ function QuizAttempts({ attempts }) {
     <div>
       <p>
         Hi there. Thanks for coming back. We notice you have attempted this quiz{" "}
-        {attempts.length} times.
+        {attempts.length === 1 ? "once" : `${attempts.length} times`}.
       </p>
       <div className="table-wrapper">
         <table>
