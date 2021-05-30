@@ -194,6 +194,7 @@ function isLastQuestionAttempted(lastQuestionObject) {
   return lastQuestionObject.selectedAnswer !== "";
 }
 export {
+  getRandomInteger,
   insertCorrectSolution,
   shuffle,
   parseQueryString,
