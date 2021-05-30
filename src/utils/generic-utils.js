@@ -1,3 +1,5 @@
+import { months } from "./constants";
+
 /**
  * Returns random integer between from and to inclusive
  * @param {integer} from
@@ -135,20 +137,6 @@ function formatQuestions(quizArray) {
 
 function formatDate(date) {
   const dateObject = new Date(date);
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
   return `${
     months[dateObject.getMonth()]
   }, ${dateObject.getDate()} ${dateObject.getFullYear()}`;
