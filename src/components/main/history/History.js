@@ -21,12 +21,6 @@ function History() {
     history.push("/error", { message: "Failed to connect to store" });
     return null;
   }
-  // function navigateToHomePageHandler() {
-  //   history.push("/");
-  // }
-  // function navigateToCategoriesPageHandler() {
-  //   history.push("/categories");
-  // }
   return (
     <section className="history">
       <h1>Your previous quiz attempts</h1>
