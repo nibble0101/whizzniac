@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { DropDownOptions } from "./DropDownOptions";
 import { Loader } from "../../loader/Loader";
 import { getSelectedOptionId } from "../../../utils/generic-utils";
@@ -31,10 +31,7 @@ function Categories() {
   function selectDifficultyLevel(event) {
     setQuizDifficultyLevel(event.target.value);
   }
-  function startQuizHandler() {
-    const path = `/quiz?category=${quizCategoryId}&difficulty=${quizDifficultyLevel.toLowerCase()}`;
-    history.push(path);
-  }
+
   useEffect(() => {
     async function fetchQuizCategories() {
       try {
@@ -80,9 +77,12 @@ function Categories() {
         />
       </div>
       <div style={{ marginTop: "1em" }}>
-        <button className="button" onClick={startQuizHandler}>
+        <Link
+          to={`/quiz?category=${quizCategoryId}&difficulty=${quizDifficultyLevel.toLowerCase()}`}
+          className="link"
+        >
           Start quiz
-        </button>
+        </Link>
       </div>
     </div>
   );
