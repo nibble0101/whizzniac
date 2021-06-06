@@ -14,6 +14,23 @@ function History() {
   );
   const history = useHistory();
 
+  function clearQuizAttemptsHistory(params) {
+    const token = getTokenFromLocalStorage();
+    if (token && quizAttempts && quizAttempts.length) {
+      whizzniacDb
+        .doc(token)
+        .set({
+          token: token,
+          attempts: [],
+        })
+        .then(() => {
+          alert("Successfully purged quiz attempts history");
+        })
+        .catch((err) => {
+          alert("An error has occurred", err);
+        });
+    }
+  }
   if (loading) {
     return <Loader />;
   }
@@ -35,6 +52,13 @@ function History() {
       ) : (
         <FirstTimeUser />
       )}
+      {quizAttempts && quizAttempts[0] && quizAttempts[0].attempts.length ? (
+        <p>
+          <button className="button" onClick={clearQuizAttemptsHistory}>
+            Clear History
+          </button>
+        </p>
+      ) : null}
       <p>
         <button className="button" onClick={navigateToHomePageHandler}>
           Home Page
