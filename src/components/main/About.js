@@ -1,11 +1,7 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function About() {
-  const history = useHistory();
-  const startQuizHandler = () => {
-    history.push("/categories");
-  };
   return (
     <section className="about-section">
       <h1> Hi there, welcome to Whizzniac</h1>
@@ -22,9 +18,9 @@ function About() {
       </p>
       <h2>Enjoy</h2>
       <p>
-        <button onClick={startQuizHandler} className="button">
+        <Link to="/categories" className="link">
           Attempt Quiz
-        </button>
+        </Link>
       </p>
     </section>
   );
