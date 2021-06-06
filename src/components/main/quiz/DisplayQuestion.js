@@ -16,7 +16,7 @@ import {
   SET_ERROR_INDICATOR,
   initialState,
   reducer,
-} from "../../../reducer/reducer";
+} from "../../../reducer/quizReducer";
 import { Loader } from "../../loader/Loader";
 import { Question } from "./Question";
 import { Controls } from "./Controls";
