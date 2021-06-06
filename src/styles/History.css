@@ -30,3 +30,6 @@ td {
 .table-wrapper::-webkit-scrollbar-thumb:hover {
   background-color: #303434;
 }
+.link--margin-right {
+  margin-right: 1em;
+}
