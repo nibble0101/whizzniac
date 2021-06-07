@@ -1,8 +1,16 @@
-import { React, useState, useEffect } from "react";
+import { React, useReducer, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { DropDownOptions } from "./DropDownOptions";
 import { Loader } from "../../loader/Loader";
-import { getSelectedOptionId } from "../../../utils/generic-utils";
+import {
+  SET_QUIZ_CATEGORIES,
+  SET_QUIZ_CATEGORY_ID,
+  SET_QUIZ_DIFFICULTY_LEVEL,
+  SET_FETCHING_INDICATOR,
+  SET_ERROR_INDICATOR,
+  initialState,
+  reducer,
+} from "../../../reducer/categoriesReducer";
 import "../../../styles/Categories.css";
 import axios from "axios";
 const difficultyLevelObject = [
@@ -13,51 +21,87 @@ const difficultyLevelObject = [
 ];
 const categoriesUrl = "https://whizzniac-api.herokuapp.com/categories";
 
+/**
+ * Container component for fetching Quiz categories
+ *
+ */
+
 function Categories() {
-  const [quizCategories, setQuizCategories] = useState([]);
-  const [quizCategoryId, setQuizCategoryId] = useState(9);
-  const [quizDifficultyLevel, setQuizDifficultyLevel] = useState("Mixed");
-  const [isFetchingData, setIsFetchingData] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const history = useHistory();
-  function selectQuizCategory(event) {
-    const selectedOptionId = getSelectedOptionId(
+  const [
+    {
       quizCategories,
-      event.target.value
-    );
-    setQuizCategoryId(selectedOptionId);
+      quizCategoryId,
+      quizDifficultyLevel,
+      isFetchingData,
+      hasError,
+    },
+    dispatch,
+  ] = useReducer(reducer, initialState);
+
+  const history = useHistory();
+
+  /**
+   * Quiz category handler
+   * @param {object} event
+   */
+
+  function selectQuizCategory(event) {
+    dispatch({
+      type: SET_QUIZ_CATEGORY_ID,
+      quizCategoryName: event.target.value,
+    });
   }
 
+  /**
+   * Quiz difficulty level handler
+   * @param {object} event
+   */
+
   function selectDifficultyLevel(event) {
-    setQuizDifficultyLevel(event.target.value);
+    dispatch({
+      type: SET_QUIZ_DIFFICULTY_LEVEL,
+      quizDifficultyLevel: event.target.value,
+    });
   }
+
+  /**
+   * Start Quiz handler
+   * Redirects to /quiz endpoint
+   */
+
   function startQuizHandler() {
     const path = `/quiz?category=${quizCategoryId}&difficulty=${quizDifficultyLevel.toLowerCase()}`;
     history.push(path);
   }
+
   useEffect(() => {
     async function fetchQuizCategories() {
       try {
-        setIsFetchingData(true);
-        const categoriesArray = (await axios.get(categoriesUrl)).data;
-        setQuizCategories(categoriesArray);
-        setQuizCategoryId(categoriesArray[0].id);
-        setQuizDifficultyLevel(difficultyLevelObject[0].name);
+        dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: true });
+        const quizCategories = (await axios.get(categoriesUrl)).data;
+        // This dispatch will update categories, difficulty level and quizCategoryId since
+        // category list is updated once on mount to avoid dispatching 3 state updates
+        dispatch({
+          type: SET_QUIZ_CATEGORIES,
+          quizDifficultyLevel: difficultyLevelObject[0].name,
+          quizCategories,
+        });
       } catch (error) {
         console.log(
           `Error Name: ${error.name}, Error Message: ${error.message}`
         );
-        setIsError(true);
+        dispatch({ type: SET_ERROR_INDICATOR, hasError: true });
       } finally {
-        setIsFetchingData(false);
+        dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: false });
       }
     }
     fetchQuizCategories();
   }, []);
+
   if (isFetchingData === true) {
     return <Loader />;
   }
-  if (isError === true) {
+  if (hasError === true) {
     history.push("/error", { message: "Failed to fetch trivia categories" });
     return null;
   }
