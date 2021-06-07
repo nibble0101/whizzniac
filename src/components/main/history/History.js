@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { Loader } from "../../loader/Loader";
 import { getTokenFromLocalStorage } from "../../../utils/generic-utils";
@@ -38,12 +38,6 @@ function History() {
     history.push("/error", { message: "Failed to connect to store" });
     return null;
   }
-  function navigateToHomePageHandler() {
-    history.push("/");
-  }
-  function navigateToCategoriesPageHandler() {
-    history.push("/categories");
-  }
   return (
     <section className="history">
       <h1>Your previous quiz attempts</h1>
@@ -60,12 +54,12 @@ function History() {
         </p>
       ) : null}
       <p>
-        <button className="button" onClick={navigateToHomePageHandler}>
-          Home Page
-        </button>
-        <button className="button" onClick={navigateToCategoriesPageHandler}>
+        <Link className="link link--margin-right" to="/">
+          Home Page{"   "}
+        </Link>
+        <Link className="link" to="/categories">
           Attempt Quiz
-        </button>
+        </Link>
       </p>
     </section>
   );
