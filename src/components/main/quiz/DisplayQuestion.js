@@ -5,7 +5,12 @@ import {
   formatQuestions,
   isLastQuestionAttempted,
   shuffle,
+  getQuizAttemptDetails,
+  getTokenFromLocalStorage,
+  setTokenToLocalStorage,
 } from "../../../utils/generic-utils";
+
+import { whizzniacDb, arrayUnion } from "../../../config/firebase-config";
 
 import {
   SET_QUIZ,
@@ -23,6 +28,7 @@ import { Controls } from "./Controls";
 import { EmitWarning } from "./EmitWarning";
 import { Statistics } from "./Statistics";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 import Fade from "react-reveal/Fade";
 
 const quizBaseUrl = "https://whizzniac-api.herokuapp.com";
@@ -99,8 +105,48 @@ function DisplayQuestion() {
    */
 
   function displaySolutionsHandler() {
-    //Redirects to solutions endpoint to display solutions
-    history.push("/solutions", { quiz, difficulty });
+    const token = getTokenFromLocalStorage();
+    const quizAttemptDetails = getQuizAttemptDetails(quiz, difficulty);
+    dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: true });
+    if (token) {
+      whizzniacDb
+        .doc(token)
+        .update({
+          attempts: arrayUnion(quizAttemptDetails),
+        })
+        .then(() => {
+          dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: false });
+          history.push("/solutions", {
+            quiz,
+            difficulty,
+            quizScore: quizAttemptDetails.quizScore,
+          });
+        })
+        .catch((err) => {
+          alert("An error has occurred");
+        });
+    } else {
+      const newToken = uuidv4();
+      whizzniacDb
+        .doc(newToken)
+        .set({
+          token: newToken,
+          attempts: [quizAttemptDetails],
+        })
+        .then(() => {
+          dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: false });
+          setTokenToLocalStorage(newToken);
+          //Redirects to solutions endpoint to display solutions
+          history.push("/solutions", {
+            quiz,
+            difficulty,
+            quizScore: quizAttemptDetails.quizScore,
+          });
+        })
+        .catch((err) => {
+          alert("An error has occurred");
+        });
+    }
   }
 
   useEffect(() => {
