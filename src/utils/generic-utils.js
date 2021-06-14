@@ -181,6 +181,31 @@ function isLastQuestion(currentQuestionIndex, totalQuestions) {
 function isLastQuestionAttempted(lastQuestionObject) {
   return lastQuestionObject.selectedAnswer !== "";
 }
+/**
+ *
+ * @param {object[]} quiz
+ * @param {string} difficulty
+ * @returns {object}
+ */
+
+function getQuizAttemptDetails(quiz, difficulty) {
+  const quizAttemptDetailsObject = {
+    quizAttemptedOn: Date.now(),
+    quizCategory: quiz[0].category,
+    quizDifficultyLevel: difficulty,
+    quizScore: 0,
+    questionCount: quiz.length,
+  };
+  const totalScore = quiz.reduce((cummulativeScore, quizObject) => {
+    return (
+      cummulativeScore +
+      (quizObject.selectedAnswer === quizObject.correctAnswer ? 1 : 0)
+    );
+  }, 0);
+  quizAttemptDetailsObject.quizScore = totalScore;
+  return quizAttemptDetailsObject;
+}
+
 export {
   getRandomInteger,
   insertCorrectSolution,
@@ -195,4 +220,5 @@ export {
   formatDate,
   isLastQuestion,
   isLastQuestionAttempted,
+  getQuizAttemptDetails,
 };
