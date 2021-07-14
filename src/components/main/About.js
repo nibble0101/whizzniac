@@ -12,13 +12,13 @@ function About() {
           history
         </Link>{" "}
         page and check out your performance on previous attempts. If this is
-        your first time here, start a new quiz session by clicking the button
+        your first time here, start a new quiz session by clicking the link
         below. You will be taken to a page where you will select quiz category
         and difficulty level before attempting the questions.
       </p>
       <h2>Enjoy</h2>
       <p>
-        <Link to="/categories" className="link">
+        <Link to="/categories" className="link link--style-border">
           Attempt Quiz
         </Link>
       </p>

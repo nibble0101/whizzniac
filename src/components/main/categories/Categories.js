@@ -116,7 +116,7 @@ function Categories() {
       <div style={{ marginTop: "1em" }}>
         <Link
           to={`/quiz?category=${quizCategoryId}&difficulty=${quizDifficultyLevel.toLowerCase()}`}
-          className="link"
+          className="link link--style-border"
         >
           Start quiz
         </Link>

@@ -42,6 +42,16 @@
 .link:hover {
   color: #0f6464;
 }
+.link--style-border {
+  border: 1px solid #303434;
+  transition: background-color 1s ease-in-out, border-radius 1s ease-in-out;
+  padding: 0.2em 1em;
+  border-radius: 2px;
+}
+.link--style-border:hover {
+  background-color: #303434;
+  color: white;
+}
 
 @media screen and (max-width: 640px) {
   .footer__top-bar {
