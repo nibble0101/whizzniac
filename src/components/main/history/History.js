@@ -54,10 +54,10 @@ function History() {
         </p>
       ) : null}
       <p>
-        <Link className="link link--margin-right" to="/">
+        <Link className="link link--margin-right link--style-border" to="/">
           Home Page{"   "}
         </Link>
-        <Link className="link" to="/categories">
+        <Link className="link link--style-border" to="/categories">
           Attempt Quiz
         </Link>
       </p>
