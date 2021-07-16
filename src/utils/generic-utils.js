@@ -143,6 +143,31 @@ function formatDate(date) {
 }
 
 /**
+ * Gets categories from localstorage
+ * @returns any[]
+ */
+
+function getCategoriesFromLocalStorage() {
+  const savedCategories = localStorage.getItem("quiz-categories");
+  if (!savedCategories) return [];
+  const { dateSaved, categories } = JSON.parse(savedCategories);
+  const oneWeek = 7 * 24 * 60 * 60 * 1000;
+  return Date.now() - dateSaved < oneWeek ? categories : [];
+}
+
+/**
+ * Sets categories to local storage
+ * @param {any[]} categories
+ */
+
+function setCategoriesToLocalStorage(categories) {
+  localStorage.setItem(
+    "quiz-categories",
+    JSON.stringify({ dateSaved: Date.now(), categories })
+  );
+}
+
+/**
  * Gets token from local storage
  * @returns {string}
  */
@@ -217,6 +242,8 @@ export {
   computeScore,
   getTokenFromLocalStorage,
   setTokenToLocalStorage,
+  setCategoriesToLocalStorage,
+  getCategoriesFromLocalStorage,
   formatDate,
   isLastQuestion,
   isLastQuestionAttempted,

@@ -11,6 +11,10 @@ import {
   initialState,
   reducer,
 } from "../../../reducer/categoriesReducer";
+import {
+  getCategoriesFromLocalStorage,
+  setCategoriesToLocalStorage,
+} from "../../../utils/generic-utils";
 import "../../../styles/Categories.css";
 import axios from "axios";
 const difficultyLevelObject = [
@@ -68,7 +72,11 @@ function Categories() {
     async function fetchQuizCategories() {
       try {
         dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: true });
-        const quizCategories = (await axios.get(categoriesUrl)).data;
+        let quizCategories = getCategoriesFromLocalStorage();
+        if (!quizCategories.length) {
+          quizCategories = (await axios.get(categoriesUrl)).data;
+          setCategoriesToLocalStorage(quizCategories);
+        }
         // This dispatch will update categories, difficulty level and quizCategoryId since
         // category list is updated once on mount to avoid dispatching 3 state updates
         dispatch({
