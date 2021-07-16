@@ -4,6 +4,12 @@
   border: 1px solid transparent;
   margin: 0 0.2em;
   margin-left: 1em;
+  min-width: 269px;
+  /* 
+  Find a way of dynamically setting 
+  the width of difficulty level select 
+  element based on the width of category
+  select element */
 }
 
 .category__title {
