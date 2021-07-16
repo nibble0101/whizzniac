@@ -1,4 +1,9 @@
-import { getRandomInteger, parseQueryString } from "../utils/generic-utils";
+import {
+  getRandomInteger,
+  parseQueryString,
+  setCategoriesToLocalStorage,
+  getCategoriesFromLocalStorage,
+} from "../utils/generic-utils";
 
 describe("Testing utility functions", () => {
   test("Tesing getRandomInteger", () => {
@@ -11,5 +16,9 @@ describe("Testing utility functions", () => {
     const parsedQueryStr = parseQueryString("?category=12");
     expect(typeof parseQueryString === "function").toBe(true);
     expect(parsedQueryStr).toEqual({ category: "12" });
+  });
+  test("Testing setCategoriesToLocalStorage and getCategoriesFromLocalStorage", () => {
+    expect(typeof setCategoriesToLocalStorage === "function").toBe(true);
+    expect(typeof getCategoriesFromLocalStorage === "function").toBe(true);
   });
 });
