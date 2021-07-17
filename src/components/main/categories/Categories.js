@@ -11,6 +11,10 @@ import {
   initialState,
   reducer,
 } from "../../../reducer/categoriesReducer";
+import {
+  getCategoriesFromLocalStorage,
+  setCategoriesToLocalStorage,
+} from "../../../utils/generic-utils";
 import "../../../styles/Categories.css";
 import axios from "axios";
 const difficultyLevelObject = [
@@ -68,7 +72,17 @@ function Categories() {
     async function fetchQuizCategories() {
       try {
         dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: true });
-        const quizCategories = (await axios.get(categoriesUrl)).data;
+        // Categories data are saved to local storage using `quizCategories` key
+        let quizCategories = getCategoriesFromLocalStorage("quizCategories");
+        // If there are no categories data in local storage or they have expired,
+        // then fetch from DB
+        if (!quizCategories.length) {
+          quizCategories = (await axios.get(categoriesUrl)).data;
+          setCategoriesToLocalStorage("quizCategories", {
+            dateSaved: Date.now(),
+            categories: quizCategories,
+          });
+        }
         // This dispatch will update categories, difficulty level and quizCategoryId since
         // category list is updated once on mount to avoid dispatching 3 state updates
         dispatch({
@@ -82,6 +96,8 @@ function Categories() {
         );
         dispatch({ type: SET_ERROR_INDICATOR, hasError: true });
       } finally {
+        // This is a memory leak if an error occurs because we are redirecting to
+        // the `/error` page yet the `finally` block will always execute
         dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: false });
       }
     }

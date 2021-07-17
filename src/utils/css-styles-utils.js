@@ -10,8 +10,4 @@ function getViewportHeight() {
   );
 }
 
-function getSelectElementWidth() {
-  const selectElement = document.querySelector("#select");
-  return selectElement ? `${selectElement.offsetWidth}px` : "auto";
-}
-export { getHeaderHeight, getViewportHeight, getSelectElementWidth };
+export { getHeaderHeight, getViewportHeight };
