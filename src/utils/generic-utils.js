@@ -147,8 +147,8 @@ function formatDate(date) {
  * @returns any[]
  */
 
-function getCategoriesFromLocalStorage() {
-  const savedCategories = localStorage.getItem("quiz-categories");
+function getCategoriesFromLocalStorage(key) {
+  const savedCategories = localStorage.getItem(key);
   if (!savedCategories) return [];
   const { dateSaved, categories } = JSON.parse(savedCategories);
   const oneWeek = 7 * 24 * 60 * 60 * 1000;
@@ -157,14 +157,12 @@ function getCategoriesFromLocalStorage() {
 
 /**
  * Sets categories to local storage
- * @param {any[]} categories
+ * @param {string} key
+ * @param {object} data
  */
 
-function setCategoriesToLocalStorage(categories) {
-  localStorage.setItem(
-    "quiz-categories",
-    JSON.stringify({ dateSaved: Date.now(), categories })
-  );
+function setCategoriesToLocalStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
 }
 
 /**
