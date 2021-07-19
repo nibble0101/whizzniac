@@ -3,6 +3,8 @@ import {
   parseQueryString,
   setCategoriesToLocalStorage,
   getCategoriesFromLocalStorage,
+  computeScore,
+  formatDate,
 } from "../utils/generic-utils";
 
 describe("Testing utility functions", () => {
@@ -49,5 +51,17 @@ describe("Testing utility functions", () => {
     ]);
     localStorage.removeItem("savedAfterOneWeek");
     localStorage.removeItem("savedWithinOneWeek");
+  });
+  test("Testing computSecore", () => {
+    expect(typeof computeScore === "function").toBe(true);
+    expect(computeScore(1, 3)).toEqual(33);
+    expect(computeScore(6, 9)).toEqual(66);
+    expect(computeScore(20, 27)).toEqual(74);
+  });
+  test("Testing formatDate", () => {
+    expect(typeof formatDate === "function").toBe(true);
+    expect(typeof formatDate(1626713105034) === "string").toBe(true);
+    expect(formatDate(1626713105034)).toEqual("Jul, 19 2021");
+    expect(formatDate(1628615525699)).toEqual("Aug, 10 2021");
   });
 });
