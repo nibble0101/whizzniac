@@ -12,6 +12,7 @@ function DropDownOptions(props) {
               key={optionObject.id}
               id={optionObject.id}
               value={optionObject.name}
+              data-testid={`${labelText}-Option`}
             >
               {optionObject.name}
             </option>

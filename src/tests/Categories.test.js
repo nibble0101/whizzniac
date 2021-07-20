@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 import { Categories } from "../components/main/categories/Categories";
@@ -7,11 +7,6 @@ import { createMemoryHistory } from "history";
 const categories = [
   { id: 9, name: "General Knowledge" },
   { id: 10, name: "Entertainment: Books" },
-];
-// eslint-disable-next-line no-unused-vars
-const difficultyLevelObject = [
-  { id: 1000, name: "Mixed" },
-  { id: 1001, name: "Easy" },
 ];
 
 const server = setupServer(
@@ -119,6 +114,58 @@ describe("Render Categories component correctly", () => {
       ).toBeInTheDocument();
       expect(screen.getByText("Mixed", { exact: true })).toBeInTheDocument();
       expect(screen.getByText("Easy", { exact: true })).toBeInTheDocument();
+    });
+  });
+
+  describe("Select Categories and Difficulty level options", () => {
+    beforeAll(() => {
+      localStorage.setItem(
+        "quizCategories",
+        JSON.stringify({ dateSaved: Date.now(), categories })
+      );
+    });
+
+    afterAll(() => {
+      localStorage.removeItem("quizCategories");
+    });
+    it("Expect to select categories correctly", async () => {
+      render(
+        <Router history={createMemoryHistory()}>
+          <Categories />
+        </Router>
+      );
+      await waitFor(() => {
+        expect(
+          screen.getByText("Select category", { exact: true })
+        ).toBeInTheDocument();
+      });
+      fireEvent.change(screen.getByLabelText("Category"), {
+        target: { value: "Entertainment: Books" },
+      });
+      const categoryOptions = screen.getAllByTestId("Category-Option");
+      expect(categoryOptions[0].selected).toBeFalsy();
+      expect(categoryOptions[1].selected).toBeTruthy();
+    });
+
+    it("Expect to select difficulty level correctly", async () => {
+      render(
+        <Router history={createMemoryHistory()}>
+          <Categories />
+        </Router>
+      );
+      await waitFor(() => {
+        expect(
+          screen.getByText("Select difficulty", { exact: true })
+        ).toBeInTheDocument();
+      });
+      fireEvent.change(screen.getByLabelText("Difficulty"), {
+        target: { value: "Hard" },
+      });
+      const categoryOptions = screen.getAllByTestId("Difficulty-Option");
+      expect(categoryOptions[0].selected).toBeFalsy();
+      expect(categoryOptions[1].selected).toBeFalsy();
+      expect(categoryOptions[2].selected).toBeFalsy();
+      expect(categoryOptions[3].selected).toBeTruthy();
     });
   });
 });
