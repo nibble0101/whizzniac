@@ -1,4 +1,4 @@
-import { useHistory, Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { React, useReducer, useEffect } from "react";
 import { DropDownOptions } from "./DropDownOptions";
 import { Loader } from "../../loader/Loader";
@@ -42,8 +42,6 @@ function Categories() {
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  const history = useHistory();
-
   /**
    * Quiz category handler
    * @param {object} event
@@ -83,22 +81,22 @@ function Categories() {
             categories: quizCategories,
           });
         }
+
         // This dispatch will update categories, difficulty level and quizCategoryId since
         // category list is updated once on mount to avoid dispatching 3 state updates
+
         dispatch({
           type: SET_QUIZ_CATEGORIES,
           quizDifficultyLevel: difficultyLevelObject[0].name,
           quizCategories,
         });
+        dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: false });
       } catch (error) {
         console.log(
           `Error Name: ${error.name}, Error Message: ${error.message}`
         );
-        dispatch({ type: SET_ERROR_INDICATOR, hasError: true });
-      } finally {
-        // This is a memory leak if an error occurs because we are redirecting to
-        // the `/error` page yet the `finally` block will always execute
         dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: false });
+        dispatch({ type: SET_ERROR_INDICATOR, hasError: true });
       }
     }
     fetchQuizCategories();
@@ -108,8 +106,14 @@ function Categories() {
     return <Loader />;
   }
   if (hasError === true) {
-    history.push("/error", { message: "Failed to fetch trivia categories" });
-    return null;
+    return (
+      <Redirect
+        to={{
+          pathname: "/error",
+          state: { message: "Failed to fetch Trivia categories" },
+        }}
+      />
+    );
   }
   return (
     <div className="category">
