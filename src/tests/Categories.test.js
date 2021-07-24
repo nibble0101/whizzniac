@@ -1,22 +1,20 @@
-import { render, screen, waitFor, fireEvent } from "@testing-library/react";
-import { rest } from "msw";
-import { setupServer } from "msw/node";
+import {
+  render,
+  screen,
+  waitFor,
+  fireEvent,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import { Categories } from "../components/main/categories/Categories";
-import { Router } from "react-router-dom";
+import { Error } from "../components/main/error/Error";
+import { Router, Switch, Route } from "react-router-dom";
 import { createMemoryHistory } from "history";
+import { rest } from "msw";
+import { server } from "../mocks/server";
 const categories = [
   { id: 9, name: "General Knowledge" },
   { id: 10, name: "Entertainment: Books" },
 ];
-
-const server = setupServer(
-  rest.get(
-    "https://whizzniac-api.herokuapp.com/categories",
-    (req, res, ctx) => {
-      return res(ctx.status(200), ctx.json(categories));
-    }
-  )
-);
 
 describe("Render Categories component correctly", () => {
   describe("Render loading indicator", () => {
@@ -27,6 +25,34 @@ describe("Render Categories component correctly", () => {
         </Router>
       );
       expect(screen.getByTestId("loader")).toBeInTheDocument();
+    });
+  });
+  describe("Render Error component if fail to load categories", () => {
+    it("Expect to display error message if loading data fails", async () => {
+      server.use(
+        rest.get(
+          "https://whizzniac-api.herokuapp.com/categories",
+          (req, res, ctx) => {
+            return res(ctx.status(500));
+          }
+        )
+      );
+      render(
+        <Router history={createMemoryHistory()}>
+          <Categories />
+          <Switch>
+            <Route path="/error">
+              <Error />
+            </Route>
+          </Switch>
+        </Router>
+      );
+      await waitForElementToBeRemoved(() => screen.queryByTestId("loader"));
+      await waitFor(() => {
+        expect(
+          screen.getByText("Failed to fetch Trivia categories")
+        ).toBeInTheDocument();
+      });
     });
   });
   describe("Render categories from local storage", () => {
@@ -75,14 +101,6 @@ describe("Render Categories component correctly", () => {
   });
 
   describe("Render categories from server", () => {
-    beforeAll(() => {
-      server.listen();
-    });
-
-    afterAll(() => {
-      server.close();
-    });
-
     it("Expect to render categories from the server correctly", async () => {
       render(
         <Router history={createMemoryHistory()}>
