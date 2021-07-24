@@ -1,4 +1,4 @@
-import { useHistory, Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { React, useReducer, useEffect } from "react";
 import { DropDownOptions } from "./DropDownOptions";
 import { Loader } from "../../loader/Loader";
@@ -42,8 +42,6 @@ function Categories() {
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  const history = useHistory();
-
   /**
    * Quiz category handler
    * @param {object} event
@@ -69,15 +67,25 @@ function Categories() {
   }
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
+
     async function fetchQuizCategories() {
       try {
         dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: true });
+
         // Categories data are saved to local storage using `quizCategories` key
         let quizCategories = getCategoriesFromLocalStorage("quizCategories");
         // If there are no categories data in local storage or they have expired,
         // then fetch from DB
         if (!quizCategories.length) {
-          quizCategories = (await axios.get(categoriesUrl)).data;
+          const response = await axios.get(categoriesUrl, {
+            cancelToken: source.token,
+          });
+          if (response.status !== 200) {
+            throw new Error("Failed to fetch quiz");
+          }
+          quizCategories = response.data;
+          // quizCategories = (await axios.get(categoriesUrl)).data;
           setCategoriesToLocalStorage("quizCategories", {
             dateSaved: Date.now(),
             categories: quizCategories,
@@ -85,31 +93,41 @@ function Categories() {
         }
         // This dispatch will update categories, difficulty level and quizCategoryId since
         // category list is updated once on mount to avoid dispatching 3 state updates
+
         dispatch({
           type: SET_QUIZ_CATEGORIES,
           quizDifficultyLevel: difficultyLevelObject[0].name,
           quizCategories,
         });
-      } catch (error) {
-        console.log(
-          `Error Name: ${error.name}, Error Message: ${error.message}`
-        );
-        dispatch({ type: SET_ERROR_INDICATOR, hasError: true });
-      } finally {
-        // This is a memory leak if an error occurs because we are redirecting to
-        // the `/error` page yet the `finally` block will always execute
         dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: false });
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log("Data fetching cancelled", error.message);
+        } else {
+          console.log(
+            `Error Name: ${error.name}, Error Message: ${error.message}`
+          );
+          dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: false });
+          dispatch({ type: SET_ERROR_INDICATOR, hasError: true });
+        }
       }
     }
     fetchQuizCategories();
+    return () => source.cancel("Data fetching cancelled");
   }, []);
 
   if (isFetchingData === true) {
     return <Loader />;
   }
   if (hasError === true) {
-    history.push("/error", { message: "Failed to fetch trivia categories" });
-    return null;
+    return (
+      <Redirect
+        to={{
+          pathname: "/error",
+          state: { message: "Failed to fetch Trivia categories" },
+        }}
+      />
+    );
   }
   return (
     <div className="category">
