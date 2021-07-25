@@ -157,6 +157,7 @@ function DisplayQuestion() {
       try {
         dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: true });
         const response = await axios.get(url, { cancelToken: source.token });
+
         if (response.status !== 200) {
           throw new Error("Failed to fetch quiz");
         }
@@ -166,20 +167,30 @@ function DisplayQuestion() {
         // more than once, each attempt should have different order
         // of questions from previous ones. Same applies to solutions
         const shuffledQuiz = shuffle(formattedQuiz);
-        dispatch({ type: SET_QUIZ, quiz: shuffledQuiz });
         dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: false });
+        dispatch({ type: SET_QUIZ, quiz: shuffledQuiz });
       } catch (error) {
         if (axios.isCancel(error)) {
           console.log("Data fetching cancelled");
         } else {
-          dispatch({ type: SET_ERROR_INDICATOR, hasError: true });
+          // console.log("error", error);
           dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: false });
+          dispatch({ type: SET_ERROR_INDICATOR, hasError: true });
         }
       }
     }
     fetchQuiz();
     return () => source.cancel("Data fetching cancelled");
   }, [category, difficulty]);
+
+  if (hasError === true) {
+    console.log(`hasError: ${hasError}`);
+    return (
+      <Redirect
+        to={{ pathname: "/error", state: { message: "Failed to fetch quiz" } }}
+      />
+    );
+  }
 
   if (!category || !difficulty) {
     return (
@@ -194,13 +205,12 @@ function DisplayQuestion() {
       />
     );
   }
-  if (hasError === true) {
-    return (
-      <Redirect
-        to={{ pathname: "/error", state: { message: "Failed to fetch quiz" } }}
-      />
-    );
-  }
+
+  // console.log(
+  //   `
+  //   isFetching: ${isFetchingData}, hasError: ${hasError}, category: ${category}, difficulty: ${difficulty}`
+  // );
+
   if (isFetchingData === true || quiz.length === 0) {
     return <Loader />;
   }
