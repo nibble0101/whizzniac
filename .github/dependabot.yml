@@ -4,4 +4,21 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "sunday"
+      time: "00:00"
+      timezone: "Africa/Nairobi"
+    labels:
+      - "npm"
+      - "dependencies"
+    assignees:
+      - "nibble0101"
+    reviewers:
+      - "nibble0101"
+    commit-message:
+      prefix: "prod"
+      prefix-development: "dev"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+  
