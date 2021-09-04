@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from "react";
-import { useLocation, useHistory, Prompt } from "react-router-dom";
+import { useLocation, useHistory, Prompt, Redirect } from "react-router-dom";
 import {
   parseQueryString,
   formatQuestions,
@@ -151,35 +151,66 @@ function DisplayQuestion() {
 
   useEffect(() => {
     const url = `${quizBaseUrl}/trivia?category=${category}&difficulty=${difficulty}`;
+    const source = axios.CancelToken.source();
+
     async function fetchQuiz() {
       try {
         dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: true });
-        const fetchedQuiz = (await axios.get(url)).data;
+        const response = await axios.get(url, { cancelToken: source.token });
+
+        if (response.status !== 200) {
+          throw new Error("Failed to fetch quiz");
+        }
+        const fetchedQuiz = response.data;
         const formattedQuiz = formatQuestions(fetchedQuiz);
         // Randomize question order. If same category is attempted
         // more than once, each attempt should have different order
         // of questions from previous ones. Same applies to solutions
         const shuffledQuiz = shuffle(formattedQuiz);
-        dispatch({ type: SET_QUIZ, quiz: shuffledQuiz });
-      } catch (err) {
-        dispatch({ type: SET_ERROR_INDICATOR, hasError: true });
-      } finally {
         dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: false });
+        dispatch({ type: SET_QUIZ, quiz: shuffledQuiz });
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log("Data fetching cancelled");
+        } else {
+          // console.log("error", error);
+          dispatch({ type: SET_FETCHING_INDICATOR, isFetchingData: false });
+          dispatch({ type: SET_ERROR_INDICATOR, hasError: true });
+        }
       }
     }
     fetchQuiz();
+    return () => source.cancel("Data fetching cancelled");
   }, [category, difficulty]);
 
-  if (!category || !difficulty) {
-    history.push("/error", {
-      message: "Incorrect or non-existent quiz category or difficulty level",
-    });
-    return null;
-  }
   if (hasError === true) {
-    history.push("/error", { message: "Failed to fetch quiz" });
-    return null;
+    console.log(`hasError: ${hasError}`);
+    return (
+      <Redirect
+        to={{ pathname: "/error", state: { message: "Failed to fetch quiz" } }}
+      />
+    );
   }
+
+  if (!category || !difficulty) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/error",
+          state: {
+            message:
+              "Incorrect or non-existent quiz category or difficulty level",
+          },
+        }}
+      />
+    );
+  }
+
+  // console.log(
+  //   `
+  //   isFetching: ${isFetchingData}, hasError: ${hasError}, category: ${category}, difficulty: ${difficulty}`
+  // );
+
   if (isFetchingData === true || quiz.length === 0) {
     return <Loader />;
   }
