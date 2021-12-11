@@ -6,7 +6,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
-    "@fortawesome/react-fontawesome": "^0.1.15",
+    "@fortawesome/react-fontawesome": "^0.1.16",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.1",
     "@testing-library/user-event": "^13.2.1",
@@ -50,7 +50,7 @@
     "husky": "=7",
     "lint-staged": ">=11",
     "msw": "^0.35.0",
-    "prettier": "2.4.1"
+    "prettier": "2.5.1"
   },
   "husky": {
     "hooks": {
